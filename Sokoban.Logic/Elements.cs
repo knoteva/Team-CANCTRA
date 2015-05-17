@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sokoban.Logic
+﻿namespace Sokoban.Logic
 {
-    class Elements
+    public class Elements
     {
+        public ElementsType Type { get; set; }
+        public int Row { get; set; }
+        public int Column { get; set; }
     }
 }

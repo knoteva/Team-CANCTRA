@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sokoban.Logic
+﻿namespace Sokoban.Logic
 {
-    class ElementsType
+    public enum ElementsType
     {
+        Player,
+        PlayerOnGoal,
+        Wall,
+        Box,
+        BoxOnGoal,
+        Goal,
+        Floor,
+        Bonus
     }
 }
