@@ -71,6 +71,24 @@ namespace Sokoban.Presentation.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 0 bob
+        ///0 bob
+        ///0 bob
+        ///0 bob
+        ///0 bob
+        ///0 bob
+        ///0 bob
+        ///0 bob
+        ///0 bob
+        ///0 bob.
+        /// </summary>
+        internal static string topPlayers {
+            get {
+                return ResourceManager.GetString("topPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap undo {

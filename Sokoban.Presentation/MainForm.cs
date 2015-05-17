@@ -85,5 +85,14 @@ namespace Sokoban.Presentation
 
             }
         }
+
+        private void topRankingMenuItem_Click_1(object sender, EventArgs e)
+        {
+            topPlayers tops = new topPlayers();
+            if (tops.ShowDialog() == DialogResult.Cancel)
+            {
+
+            }
+        }
     }
 }

@@ -30,11 +30,15 @@
         {
             this.startMenu = new System.Windows.Forms.MenuStrip();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newGameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeLevelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.levelSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topRankingMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.levelLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -42,15 +46,11 @@
             this.timerLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
             this.pointsLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.newGameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeLevelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actionMenu = new System.Windows.Forms.ToolStrip();
-            this.restartButton = new System.Windows.Forms.ToolStripButton();
-            this.undoButton = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.drawingArea = new System.Windows.Forms.PictureBox();
+            this.restartButton = new System.Windows.Forms.ToolStripButton();
+            this.undoButton = new System.Windows.Forms.ToolStripButton();
             this.startMenu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.actionMenu.SuspendLayout();
@@ -80,6 +80,24 @@
             this.startToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.startToolStripMenuItem.Text = "Start";
             // 
+            // newGameMenuItem
+            // 
+            this.newGameMenuItem.Name = "newGameMenuItem";
+            this.newGameMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.newGameMenuItem.Text = "New game";
+            // 
+            // changeLevelMenuItem
+            // 
+            this.changeLevelMenuItem.Name = "changeLevelMenuItem";
+            this.changeLevelMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.changeLevelMenuItem.Text = "Change level";
+            // 
+            // exitMenuItem
+            // 
+            this.exitMenuItem.Name = "exitMenuItem";
+            this.exitMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.exitMenuItem.Text = "Exit";
+            // 
             // levelSelectionToolStripMenuItem
             // 
             this.levelSelectionToolStripMenuItem.Name = "levelSelectionToolStripMenuItem";
@@ -92,6 +110,7 @@
             this.topRankingMenuItem.Name = "topRankingMenuItem";
             this.topRankingMenuItem.Size = new System.Drawing.Size(55, 20);
             this.topRankingMenuItem.Text = "Top 10";
+            this.topRankingMenuItem.Click += new System.EventHandler(this.topRankingMenuItem_Click_1);
             // 
             // statusStrip1
             // 
@@ -112,18 +131,24 @@
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(42, 17);
+            this.toolStripStatusLabel2.Text = "Status:";
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(69, 17);
+            this.statusLabel.Text = "Not playing";
+            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.AutoSize = false;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(350, 17);
             this.toolStripStatusLabel1.Text = " ";
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(42, 17);
-            this.toolStripStatusLabel2.Text = "Status:";
             // 
             // toolStripStatusLabel3
             // 
@@ -166,30 +191,6 @@
             this.pointsLabel.Size = new System.Drawing.Size(19, 17);
             this.pointsLabel.Text = "20";
             // 
-            // statusLabel
-            // 
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(69, 17);
-            this.statusLabel.Text = "Not playing";
-            // 
-            // newGameMenuItem
-            // 
-            this.newGameMenuItem.Name = "newGameMenuItem";
-            this.newGameMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.newGameMenuItem.Text = "New game";
-            // 
-            // changeLevelMenuItem
-            // 
-            this.changeLevelMenuItem.Name = "changeLevelMenuItem";
-            this.changeLevelMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.changeLevelMenuItem.Text = "Change level";
-            // 
-            // exitMenuItem
-            // 
-            this.exitMenuItem.Name = "exitMenuItem";
-            this.exitMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.exitMenuItem.Text = "Exit";
-            // 
             // actionMenu
             // 
             this.actionMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -200,24 +201,6 @@
             this.actionMenu.Size = new System.Drawing.Size(695, 25);
             this.actionMenu.TabIndex = 6;
             this.actionMenu.Text = "toolStrip1";
-            // 
-            // restartButton
-            // 
-            this.restartButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.restartButton.Image = global::Sokoban.Presentation.Properties.Resources.restart;
-            this.restartButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.restartButton.Name = "restartButton";
-            this.restartButton.Size = new System.Drawing.Size(23, 22);
-            this.restartButton.Text = "restartButton";
-            // 
-            // undoButton
-            // 
-            this.undoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.undoButton.Image = global::Sokoban.Presentation.Properties.Resources.undo;
-            this.undoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.undoButton.Name = "undoButton";
-            this.undoButton.Size = new System.Drawing.Size(23, 22);
-            this.undoButton.Text = "undoButton";
             // 
             // panel1
             // 
@@ -238,6 +221,24 @@
             this.drawingArea.TabIndex = 0;
             this.drawingArea.TabStop = false;
             this.drawingArea.Visible = false;
+            // 
+            // restartButton
+            // 
+            this.restartButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.restartButton.Image = global::Sokoban.Presentation.Properties.Resources.restart;
+            this.restartButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.restartButton.Name = "restartButton";
+            this.restartButton.Size = new System.Drawing.Size(23, 22);
+            this.restartButton.Text = "restartButton";
+            // 
+            // undoButton
+            // 
+            this.undoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.undoButton.Image = global::Sokoban.Presentation.Properties.Resources.undo;
+            this.undoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.undoButton.Name = "undoButton";
+            this.undoButton.Size = new System.Drawing.Size(23, 22);
+            this.undoButton.Text = "undoButton";
             // 
             // MainForm
             // 
