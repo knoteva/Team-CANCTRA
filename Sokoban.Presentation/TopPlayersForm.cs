@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Sokoban.Presentation
 {
-    public partial class topPlayers : Form
+    public partial class TopPlayersForm : Form
     {
-        public topPlayers()
+        public TopPlayersForm()
         {
             InitializeComponent();
             string file = Properties.Resources.topPlayers;
@@ -27,8 +27,6 @@ namespace Sokoban.Presentation
                 playerList.Add(p);
             }
 
-            //DataGridView playersGrid = new DataGridView();
-            //playersGrid.DataSource = null;
             playersGrid.DataSource = new BindingList<tPlayer>(playerList);
         }
 
