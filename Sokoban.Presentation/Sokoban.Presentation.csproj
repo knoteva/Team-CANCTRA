@@ -108,7 +108,6 @@
     <Content Include="Resources\Floor.png" />
     <Content Include="Resources\Goal.png" />
     <Content Include="Resources\Player.png" />
-    <None Include="Resources\topPlayers.txt" />
     <Content Include="Resources\Wall.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
