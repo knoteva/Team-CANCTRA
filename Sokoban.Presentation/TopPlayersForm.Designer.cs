@@ -30,9 +30,10 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.playersGrid = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.score = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.playersGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,6 +41,7 @@
             // 
             this.playersGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.playersGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.num,
             this.name,
             this.score});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -53,8 +55,27 @@
             this.playersGrid.Location = new System.Drawing.Point(13, 13);
             this.playersGrid.Name = "playersGrid";
             this.playersGrid.RowHeadersVisible = false;
-            this.playersGrid.Size = new System.Drawing.Size(259, 206);
+            this.playersGrid.Size = new System.Drawing.Size(259, 255);
             this.playersGrid.TabIndex = 0;
+            this.playersGrid.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.playersGrid_RowPostPaint);
+            // 
+            // button1
+            // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button1.Location = new System.Drawing.Point(197, 274);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Close";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // num
+            // 
+            this.num.HeaderText = "N";
+            this.num.Name = "num";
+            this.num.ReadOnly = true;
+            this.num.Width = 40;
             // 
             // name
             // 
@@ -71,22 +92,12 @@
             this.score.Name = "score";
             this.score.ReadOnly = true;
             // 
-            // button1
-            // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Location = new System.Drawing.Point(196, 226);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Close";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // TopPlayersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(284, 309);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.playersGrid);
             this.Name = "TopPlayersForm";
@@ -100,8 +111,9 @@
         #endregion
 
         private System.Windows.Forms.DataGridView playersGrid;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn num;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn score;
-        private System.Windows.Forms.Button button1;
     }
 }

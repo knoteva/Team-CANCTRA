@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Resources;
+using System.Collections;
 
 namespace Sokoban.Presentation
 {
@@ -15,19 +17,60 @@ namespace Sokoban.Presentation
         public TopPlayersForm()
         {
             InitializeComponent();
-            string file = Properties.Resources.topPlayers;
-            List<string> players = file.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
-            List<tPlayer> playerList = new List<tPlayer>();
-            foreach (string s in players)
+            List<tPlayer> players = new List<tPlayer>();
+            try
             {
-                tPlayer p = new tPlayer();
-                string[] pLine = s.Split(' ');
-                p.name = pLine[1];
-                p.score = pLine[0];
-                playerList.Add(p);
-            }
+                string resxFile = @".\topPlayersResources.resx";
+                using (ResXResourceReader resxReader = new ResXResourceReader(resxFile))
+                {
+                    foreach (DictionaryEntry entry in resxReader)
+                    {
+                        if (((string)entry.Key).StartsWith("Player"))
+                            players.Add((tPlayer)entry.Value);
 
-            playersGrid.DataSource = new BindingList<tPlayer>(playerList);
+                    }
+                }
+                if (players.Count < 10)
+                {
+                    for (int i = players.Count; i < 10; i++)
+                    {
+                        tPlayer np = new tPlayer();
+                        np.name = "bob";
+                        np.score = "0";
+                        players.Add(np);
+
+                    }
+
+                }
+            }
+            catch
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    tPlayer np = new tPlayer();
+                    np.name = "bob";
+                    np.score = "0";
+                    players.Add(np);
+                }
+
+            }
+            List<tPlayer> sortedList = players.OrderByDescending(p => p.score).ToList();
+
+            playersGrid.DataSource = new BindingList<tPlayer>(players);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void playersGrid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if (e.RowIndex < 10)
+            {
+                playersGrid.Rows[e.RowIndex].Cells[0].Value
+            = (e.RowIndex + 1).ToString();
+            }
         }
 
     }
