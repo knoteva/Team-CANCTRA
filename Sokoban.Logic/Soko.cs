@@ -12,14 +12,7 @@ namespace Sokoban.Logic
     {
         public IEnumerator GetEnumerator()
         {
-
-            foreach (Elements[] row in _level)
-            {
-                foreach (Elements element in row)
-                {
-                    yield return element;
-                }
-            }
+            return _level.SelectMany(row => row).GetEnumerator();
         }
 
         public int Width { get; private set; }
@@ -36,18 +29,20 @@ namespace Sokoban.Logic
 
         public event EventHandler LevelCompleted;
         private Elements[][] _level;
-        private Elements player;
-        private int goalsCount;
-        private int goalsFilled;
-        private int bonusCount;
+        private Elements _player;
+        private int _goalsCount;
+        private int _goalsFilled;
+        private int _bonusCoins;
+        private int _bonusTime;
 
         public void LoadLevevel(Level level)
         {
             Width = level.Width;
             Height = level.Height;
-            goalsCount = 0;
-            goalsFilled = 0;
-            bonusCount = 0;
+            _goalsCount = 0;
+            _goalsFilled = 0;
+            _bonusTime = 0;
+            _bonusCoins = 0;         
             _level = new Elements[level.Data.Length][];
 
             for (int row = 0; row < level.Data.Length; row++)
@@ -61,11 +56,11 @@ namespace Sokoban.Logic
                     {
                         case '@':
                             _level[row][col].Type = ElementsType.Player;
-                            player = _level[row][col];
+                            _player = _level[row][col];
                             break;
                         case '+':
                             _level[row][col].Type = ElementsType.PlayerOnGoal;
-                            player = _level[row][col];
+                            _player = _level[row][col];
                             break;
                         case '#':
                             _level[row][col].Type = ElementsType.Wall;
@@ -75,21 +70,24 @@ namespace Sokoban.Logic
                             break;
                         case '*':
                             _level[row][col].Type = ElementsType.BoxOnGoal;
-                            goalsCount++;
-                            goalsFilled++;
+                            _goalsCount++;
+                            _goalsFilled++;
                             break;
                         case '.':
                             _level[row][col].Type = ElementsType.Goal;
-                            goalsCount++;
+                            _goalsCount++;
                             break;
                         case ' ':
                             _level[row][col].Type = ElementsType.Floor;
                             break;
-                        case '%':
-                            _level[row][col].Type = ElementsType.Bonus;
-
+                        case '~':
+                            _level[row][col].Type = ElementsType.BonusTime;
+                            _bonusTime += 5;
                             break;
-
+                        case '%':
+                            _level[row][col].Type = ElementsType.BonusPoints;
+                            _bonusCoins += 10;
+                            break;
                     }
                 }
             }
@@ -98,8 +96,8 @@ namespace Sokoban.Logic
 
         public bool MovePlayer(MoveDirection moveDirection)
         {
-            int newPlayerRow = player.Row;
-            int newPlayerCol = player.Col;
+            int newPlayerRow = _player.Row;
+            int newPlayerCol = _player.Col;
             int newBoxRow = newPlayerRow;
             int newBoxCol = newPlayerCol;
             bool hasMoved = false;
@@ -133,19 +131,20 @@ namespace Sokoban.Logic
             {
                 List<Elements> elementsList = new List<Elements>()
                 {
-                    new Elements() {Type = _level[player.Row][player.Col].Type, Row = player.Row, Col = player.Col},
+                    new Elements() {Type = _level[_player.Row][_player.Col].Type, Row = _player.Row, Col = _player.Col},
                     new Elements() {Type = _level[newPlayerRow][newPlayerCol].Type, Row = newPlayerRow, Col = newPlayerCol}
                 };
 
-                _level[player.Row][player.Col].Type = _level[player.Row][player.Col].Type == ElementsType.PlayerOnGoal ? ElementsType.Goal
-                                                                                                                                : ElementsType.Floor;
-
-                if (_level[newPlayerRow][newPlayerCol].Type == ElementsType.Goal ||
+                _level[_player.Row][_player.Col].Type = _level[_player.Row][_player.Col].Type == ElementsType.PlayerOnGoal ? ElementsType.Goal: ElementsType.Floor;
+                                                                                                                                
+                // TODO if for coins and time
+                if (_level[newPlayerRow][newPlayerCol].Type == ElementsType.Goal || 
                     _level[newPlayerRow][newPlayerCol].Type == ElementsType.BoxOnGoal)
+                    
                 {
                     if (_level[newPlayerRow][newPlayerCol].Type == ElementsType.BoxOnGoal)
                     {
-                        goalsFilled--;
+                        _goalsFilled--;
                     }
 
                     _level[newPlayerRow][newPlayerCol].Type = ElementsType.PlayerOnGoal;
@@ -162,9 +161,9 @@ namespace Sokoban.Logic
                     if (_level[newBoxRow][newBoxCol].Type == ElementsType.Goal)
                     {
                         _level[newBoxRow][newBoxCol].Type = ElementsType.BoxOnGoal;
-                        goalsFilled++;
+                        _goalsFilled++;
 
-                        if (goalsFilled == goalsCount && LevelCompleted != null)
+                        if (_goalsFilled == _goalsCount && LevelCompleted != null)
                         {
                             LevelCompleted(this, new EventArgs());
                         }
@@ -175,7 +174,7 @@ namespace Sokoban.Logic
                     }
                 }
 
-                player = _level[newPlayerRow][newPlayerCol];
+                _player = _level[newPlayerRow][newPlayerCol];
                 hasMoved = true;
                 //
             }

@@ -41,8 +41,8 @@ namespace Sokoban.Logic
         private Level GetLevel(int levelNumber)
         {
             var level = _levelsFile.Descendants("Level").Skip(levelNumber).First().Elements();
-            int levelWidth = (from row in level
-                              select row.Value.Length).Max();
+            int levelWidth = (from row in level select row.Value.Length).Max();
+                              
             int levelHeight = level.Count();
 
             string[] levelData = new string[levelHeight];

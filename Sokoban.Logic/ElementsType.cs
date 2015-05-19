@@ -9,6 +9,7 @@
         BoxOnGoal,
         Goal,
         Floor,
-        Bonus
+        BonusTime,
+        BonusPoints
     }
 }

@@ -46,3 +46,16 @@ D:\Lessons\Sokoban\trunk\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.Mai
 D:\Lessons\Sokoban\trunk\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.Properties.Resources.resources
 D:\Lessons\Sokoban\trunk\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.TopPlayersForm.resources
 D:\Lessons\Sokoban\trunk\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.csproj.GenerateResource.Cache
+C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\bin\Debug\Sokoban.Presentation.exe.config
+C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\bin\Debug\Sokoban.Presentation.exe
+C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\bin\Debug\Sokoban.Presentation.pdb
+C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\bin\Debug\Sokoban.Logic.dll
+C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\bin\Debug\Sokoban.Logic.pdb
+C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.csprojResolveAssemblyReference.cache
+C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.LevelSelectionForm.resources
+C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.MainForm.resources
+C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.Properties.Resources.resources
+C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.TopPlayersForm.resources
+C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.csproj.GenerateResource.Cache
+C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.exe
+C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.pdb
