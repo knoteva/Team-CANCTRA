@@ -16,11 +16,11 @@ namespace Sokoban.Presentation
     public partial class LevelSelectionForm : Form
     {
         private Soko soko;
-        public int selectedLevel { get; set; }
-        int cellSize;
-        int paddingX;
-        int paddingY;
-        string file;
+        public int SelectedLevel { get; set; }
+        int _cellSize;
+        int _paddingX;
+        int _paddingY;
+        string _file;
         public LevelSelectionForm()
         {
             InitializeComponent();
@@ -29,14 +29,14 @@ namespace Sokoban.Presentation
 
         private void levelSelectionGrid_SelectionChanged(object sender, EventArgs e)
         {
-            selectedLevel = levelSelectionGrid.CurrentRow.Index;
+            SelectedLevel = levelSelectionGrid.CurrentRow.Index;
 
-            LevelsCollection selectedLevelCollection = new LevelsCollection(file);
-            soko.LoadLevevel(selectedLevelCollection[selectedLevel]);
+            LevelsCollection selectedLevelCollection = new LevelsCollection(_file);
+            soko.LoadLevevel(selectedLevelCollection[SelectedLevel]);
 
-            cellSize = levelPreview.Width / Math.Max(soko.Width, soko.Height);
-            paddingX = (levelPreview.Width - (soko.Width * cellSize)) / 2;
-            paddingY = (levelPreview.Height - (soko.Height * cellSize)) / 2;
+            _cellSize = levelPreview.Width / Math.Max(soko.Width, soko.Height);
+            _paddingX = (levelPreview.Width - (soko.Width * _cellSize)) / 2;
+            _paddingY = (levelPreview.Height - (soko.Height * _cellSize)) / 2;
 
             levelPreview.Invalidate();
 
@@ -50,8 +50,8 @@ namespace Sokoban.Presentation
             {
                 cwd = cwd.Replace("\\bin\\Debug", "");
             }          
-            file = cwd + @"\\Levels\\Levels.slc";
-            LevelsCollection selectedLevelCollection = new LevelsCollection(file);
+            _file = cwd + @"\\Levels\\Levels.slc";
+            var selectedLevelCollection = new LevelsCollection(_file);
             for (int i = 1; i <= selectedLevelCollection.NumberOfLevels; i++)
             {
                 levelSelectionGrid.Rows.Add("Level " + i);
@@ -81,14 +81,20 @@ namespace Sokoban.Presentation
                     case ElementsType.PlayerOnGoal:
                         img = Properties.Resources.Player;
                         break;
+                    case ElementsType.BonusTime:
+                        img = Properties.Resources.Time;
+                        break;
+                    case ElementsType.BonusPoints:
+                        img = Properties.Resources.Points;
+                        break;
                     
                 }
 
                 if (img != null)
                 {
-                    e.Graphics.DrawImage(img, paddingX + element.Col * cellSize,
-                                         paddingY + element.Row * cellSize,
-                                         cellSize, cellSize);
+                    e.Graphics.DrawImage(img, _paddingX + element.Col * _cellSize,
+                                         _paddingY + element.Row * _cellSize,
+                                         _cellSize, _cellSize);
                 }
             }
         }
