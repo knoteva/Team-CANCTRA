@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Resources;
 using System.Collections;
+using Sokoban.Presentation.Helpers;
 
 namespace Sokoban.Presentation
 {
@@ -17,7 +13,7 @@ namespace Sokoban.Presentation
         public TopPlayersForm()
         {
             InitializeComponent();
-            List<tPlayer> players = new List<tPlayer>();
+            List<TopPlayer> players = new List<TopPlayer>();
             try
             {
                 string resxFile = @".\topPlayersResources.resx";
@@ -26,7 +22,7 @@ namespace Sokoban.Presentation
                     foreach (DictionaryEntry entry in resxReader)
                     {
                         if (((string)entry.Key).StartsWith("Player"))
-                            players.Add((tPlayer)entry.Value);
+                            players.Add((TopPlayer)entry.Value);
 
                     }
                 }
@@ -34,11 +30,10 @@ namespace Sokoban.Presentation
                 {
                     for (int i = players.Count; i < 10; i++)
                     {
-                        tPlayer np = new tPlayer();
-                        np.name = "bob";
-                        np.score = "0";
+                        TopPlayer np = new TopPlayer();
+                        np.Name = "bob";
+                        np.Score = "0";
                         players.Add(np);
-
                     }
 
                 }
@@ -47,16 +42,15 @@ namespace Sokoban.Presentation
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    tPlayer np = new tPlayer();
-                    np.name = "bob";
-                    np.score = "0";
+                    TopPlayer np = new TopPlayer();
+                    np.Name = "bob";
+                    np.Score = "0";
                     players.Add(np);
                 }
 
             }
-            List<tPlayer> sortedList = players.OrderByDescending(p => p.score).ToList();
 
-            playersGrid.DataSource = new BindingList<tPlayer>(players);
+            playersGrid.DataSource = new BindingList<TopPlayer>(players);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -74,9 +68,5 @@ namespace Sokoban.Presentation
         }
 
     }
-    class tPlayer
-    {
-        public string name { get; set; }
-        public string score { get; set; }
-    }
+
 }
