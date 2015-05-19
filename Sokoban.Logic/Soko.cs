@@ -83,7 +83,7 @@ namespace Sokoban.Logic
                             goalsCount++;
                             break;
                         case ' ':
-                            _level[row][col].Type = ElementsType.Goal;
+                            _level[row][col].Type = ElementsType.Floor;
                             break;
                         case '%':
                             _level[row][col].Type = ElementsType.Bonus;

@@ -28,29 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.levelSelectionGrid = new System.Windows.Forms.DataGridView();
             this.Level = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.levelPreview = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.levelPreview = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.levelSelectionGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.levelPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // levelSelectionGrid
             // 
+            this.levelSelectionGrid.AllowUserToAddRows = false;
+            this.levelSelectionGrid.AllowUserToDeleteRows = false;
             this.levelSelectionGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.levelSelectionGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Level});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.levelSelectionGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.levelSelectionGrid.DefaultCellStyle = dataGridViewCellStyle1;
             this.levelSelectionGrid.GridColor = System.Drawing.SystemColors.AppWorkspace;
             this.levelSelectionGrid.Location = new System.Drawing.Point(13, 13);
             this.levelSelectionGrid.Name = "levelSelectionGrid";
@@ -59,6 +62,7 @@
             this.levelSelectionGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.levelSelectionGrid.Size = new System.Drawing.Size(243, 236);
             this.levelSelectionGrid.TabIndex = 0;
+            this.levelSelectionGrid.SelectionChanged += new System.EventHandler(this.levelSelectionGrid_SelectionChanged);
             // 
             // Level
             // 
@@ -66,15 +70,6 @@
             this.Level.HeaderText = "Level";
             this.Level.Name = "Level";
             this.Level.ReadOnly = true;
-            // 
-            // levelPreview
-            // 
-            this.levelPreview.BackColor = System.Drawing.Color.Gray;
-            this.levelPreview.Location = new System.Drawing.Point(263, 13);
-            this.levelPreview.Name = "levelPreview";
-            this.levelPreview.Size = new System.Drawing.Size(248, 236);
-            this.levelPreview.TabIndex = 1;
-            this.levelPreview.TabStop = false;
             // 
             // button1
             // 
@@ -96,17 +91,39 @@
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(13, 264);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(123, 23);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Generate random level";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // levelPreview
+            // 
+            this.levelPreview.BackColor = System.Drawing.Color.Gray;
+            this.levelPreview.Location = new System.Drawing.Point(263, 13);
+            this.levelPreview.Name = "levelPreview";
+            this.levelPreview.Size = new System.Drawing.Size(248, 236);
+            this.levelPreview.TabIndex = 1;
+            this.levelPreview.TabStop = false;
+            this.levelPreview.Paint += new System.Windows.Forms.PaintEventHandler(this.levelPreview_Paint);
+            // 
             // LevelSelectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(523, 299);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.levelPreview);
             this.Controls.Add(this.levelSelectionGrid);
             this.Name = "LevelSelectionForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "LevelSelectionForm";
+            this.Load += new System.EventHandler(this.LevelSelectionForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.levelSelectionGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.levelPreview)).EndInit();
             this.ResumeLayout(false);
@@ -120,5 +137,6 @@
         private System.Windows.Forms.PictureBox levelPreview;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

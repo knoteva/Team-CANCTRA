@@ -42,6 +42,7 @@
     <Compile Include="Elements.cs" />
     <Compile Include="ElementsType.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="LevelsCollection.cs" />
     <Compile Include="Soko.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

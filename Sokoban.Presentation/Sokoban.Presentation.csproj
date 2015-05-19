@@ -105,10 +105,19 @@
     <None Include="Resources\undo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Floor.png" />
-    <Content Include="Resources\Goal.png" />
-    <Content Include="Resources\Player.png" />
-    <Content Include="Resources\Wall.png" />
+    <None Include="Resources\Player.png" />
+    <None Include="Resources\Wall.png" />
+    <None Include="Resources\Box.jpg" />
+    <None Include="Resources\Floor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sokoban.Logic\Sokoban.Logic.csproj">
+      <Project>{9dc9b671-cb50-4a6d-83e8-01adbe838a2c}</Project>
+      <Name>Sokoban.Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Goal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
