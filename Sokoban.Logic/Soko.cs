@@ -237,6 +237,7 @@ namespace Sokoban.Logic
         public void LoadLevel(int levelNumber)
         {
             this.CurrentLevel = levelNumber;
+            this.LoadLevel(this.SelectedCollection[CurrentLevel]);
         }
 
         public int GetSelectedCollectionWidth()

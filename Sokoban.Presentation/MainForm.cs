@@ -30,6 +30,7 @@ namespace Sokoban.Presentation
 
         private bool _isLevelComplete;
         private bool _isLastLevel;
+        private int _currentLevel;
 
         public MainForm()
         {
@@ -63,7 +64,7 @@ namespace Sokoban.Presentation
             _isLevelComplete = true;
             // undoMenuItem.Enabled = false;
             undoButton.Enabled = false;
-
+            _currentLevel++;
             if (this.Model.CurrentLevel + 1 == this.Model.SelectedCollection.NumberOfLevels)
             {
                 statusLabel.Text = "Level Completed! No more levels in the collection.";
@@ -72,7 +73,6 @@ namespace Sokoban.Presentation
             else
             {
                 statusLabel.Text = "Level Completed! Press enter to go to the next level...";
-                this.Model.NextLevel();
             }
 
             drawingArea.Invalidate();
@@ -89,7 +89,7 @@ namespace Sokoban.Presentation
             {
                 if (!_isLastLevel && e.KeyCode == Keys.Enter)
                 {
-                    GoToLevel(this.Model.CurrentLevel + 1);
+                    GoToLevel(_currentLevel);
                 }
             }
             else
@@ -112,7 +112,7 @@ namespace Sokoban.Presentation
                         break;
                     case Keys.Space:
                         // for testing...
-                        GoToLevel(this.Model.CurrentLevel + 1);
+                        GoToLevel(_currentLevel);
                         break;
                     case Keys.Back:
                         //UndoMovement();
@@ -206,10 +206,11 @@ namespace Sokoban.Presentation
         private void StartGame()
         {
             var game = SelectGameTypeForm.ShowForm();
+            _currentLevel = 0;
             if (GameType.None != game)
             {
                 this.Model.StartNewGame(game);
-                GoToLevel(this.Model.CurrentLevel);
+                GoToLevel(_currentLevel);
             }
         }
 
@@ -226,7 +227,6 @@ namespace Sokoban.Presentation
         private void GoToLevel(int levelNumber)
         {
             this.Model.LoadLevel(levelNumber);
-            //_currentLevel = levelNumber;
 
             drawingArea.Width = this.Model.GetSelectedCollectionWidth() * _cellSize;
             drawingArea.Height = this.Model.GetSelectedCollectionHeight() * _cellSize;
