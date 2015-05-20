@@ -47,14 +47,14 @@
             this.toolStripStatusLabel8 = new System.Windows.Forms.ToolStripStatusLabel();
             this.pointsLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.actionMenu = new System.Windows.Forms.ToolStrip();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.drawingArea = new System.Windows.Forms.PictureBox();
             this.restartButton = new System.Windows.Forms.ToolStripButton();
             this.undoButton = new System.Windows.Forms.ToolStripButton();
+            this.backgroundPanel = new System.Windows.Forms.Panel();
+            this.drawingArea = new System.Windows.Forms.PictureBox();
             this.startMenu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.actionMenu.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.backgroundPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).BeginInit();
             this.SuspendLayout();
             // 
@@ -202,26 +202,6 @@
             this.actionMenu.TabIndex = 6;
             this.actionMenu.Text = "toolStrip1";
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.drawingArea);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 49);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(695, 487);
-            this.panel1.TabIndex = 7;
-            // 
-            // drawingArea
-            // 
-            this.drawingArea.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.drawingArea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.drawingArea.Location = new System.Drawing.Point(0, 0);
-            this.drawingArea.Name = "drawingArea";
-            this.drawingArea.Size = new System.Drawing.Size(438, 358);
-            this.drawingArea.TabIndex = 0;
-            this.drawingArea.TabStop = false;
-            this.drawingArea.Visible = false;
-            // 
             // restartButton
             // 
             this.restartButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -240,12 +220,32 @@
             this.undoButton.Size = new System.Drawing.Size(23, 22);
             this.undoButton.Text = "undoButton";
             // 
+            // backgroundPanel
+            // 
+            this.backgroundPanel.Controls.Add(this.drawingArea);
+            this.backgroundPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.backgroundPanel.Location = new System.Drawing.Point(0, 49);
+            this.backgroundPanel.Name = "backgroundPanel";
+            this.backgroundPanel.Size = new System.Drawing.Size(695, 487);
+            this.backgroundPanel.TabIndex = 7;
+            // 
+            // drawingArea
+            // 
+            this.drawingArea.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.drawingArea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.drawingArea.Location = new System.Drawing.Point(0, 0);
+            this.drawingArea.Name = "drawingArea";
+            this.drawingArea.Size = new System.Drawing.Size(438, 358);
+            this.drawingArea.TabIndex = 0;
+            this.drawingArea.TabStop = false;
+            this.drawingArea.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(695, 558);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.backgroundPanel);
             this.Controls.Add(this.actionMenu);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.startMenu);
@@ -262,7 +262,7 @@
             this.statusStrip1.PerformLayout();
             this.actionMenu.ResumeLayout(false);
             this.actionMenu.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.backgroundPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.drawingArea)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -292,7 +292,7 @@
         private System.Windows.Forms.ToolStrip actionMenu;
         private System.Windows.Forms.ToolStripButton restartButton;
         private System.Windows.Forms.ToolStripButton undoButton;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel backgroundPanel;
         private System.Windows.Forms.PictureBox drawingArea;
     }
 }

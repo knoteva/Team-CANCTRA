@@ -39,10 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elements.cs" />
-    <Compile Include="ElementsType.cs" />
+    <Compile Include="Element.cs" />
+    <Compile Include="ElementType.cs" />
+    <Compile Include="GameType.cs" />
     <Compile Include="Level.cs" />
-    <Compile Include="LevelsCollection.cs" />
+    <Compile Include="LevelCollection.cs" />
     <Compile Include="Soko.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

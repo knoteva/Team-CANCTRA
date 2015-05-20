@@ -1,6 +1,6 @@
 ﻿namespace Sokoban.Logic
 {
-    public enum ElementsType
+    public enum ElementType
     {
         Player,
         PlayerOnGoal,

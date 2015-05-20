@@ -59,3 +59,4 @@ C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\De
 C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.csproj.GenerateResource.Cache
 C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.exe
 C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.pdb
+D:\Lessons\Sokoban\trunk\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.SelectGameTypeForm.resources

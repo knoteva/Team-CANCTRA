@@ -31,8 +31,8 @@ namespace Sokoban.Presentation
         {
             SelectedLevel = levelSelectionGrid.CurrentRow.Index;
 
-            LevelsCollection selectedLevelCollection = new LevelsCollection(_file);
-            soko.LoadLevevel(selectedLevelCollection[SelectedLevel]);
+            LevelCollection selectedLevelCollection = new LevelCollection(_file);
+            soko.LoadLevel(selectedLevelCollection[SelectedLevel]);
 
             _cellSize = levelPreview.Width / Math.Max(soko.Width, soko.Height);
             _paddingX = (levelPreview.Width - (soko.Width * _cellSize)) / 2;
@@ -51,7 +51,7 @@ namespace Sokoban.Presentation
                 cwd = cwd.Replace("\\bin\\Debug", "");
             }          
             _file = cwd + @"\\Levels\\Levels.slc";
-            var selectedLevelCollection = new LevelsCollection(_file);
+            var selectedLevelCollection = new LevelCollection(_file);
             for (int i = 1; i <= selectedLevelCollection.NumberOfLevels; i++)
             {
                 levelSelectionGrid.Rows.Add("Level " + i);
@@ -61,30 +61,30 @@ namespace Sokoban.Presentation
         //draw level preview
         private void levelPreview_Paint(object sender, PaintEventArgs e)
         {
-            foreach (Elements element in soko)
+            foreach (Element element in soko)
             {
                 Bitmap img = null;
 
                 switch (element.Type)
                 {
-                    case ElementsType.Wall:
+                    case ElementType.Wall:
                         img = Properties.Resources.Wall;
                         break;
-                    case ElementsType.Box:
-                    case ElementsType.BoxOnGoal:
+                    case ElementType.Box:
+                    case ElementType.BoxOnGoal:
                         img = Properties.Resources.Box;
                         break;
-                    case ElementsType.Goal:
+                    case ElementType.Goal:
                         img = Properties.Resources.Goal;
                         break;
-                    case ElementsType.Player:
-                    case ElementsType.PlayerOnGoal:
+                    case ElementType.Player:
+                    case ElementType.PlayerOnGoal:
                         img = Properties.Resources.Player;
                         break;
-                    case ElementsType.BonusTime:
+                    case ElementType.BonusTime:
                         img = Properties.Resources.Time;
                         break;
-                    case ElementsType.BonusPoints:
+                    case ElementType.BonusPoints:
                         img = Properties.Resources.Points;
                         break;
                     
@@ -92,7 +92,7 @@ namespace Sokoban.Presentation
 
                 if (img != null)
                 {
-                    e.Graphics.DrawImage(img, _paddingX + element.Col * _cellSize,
+                    e.Graphics.DrawImage(img, _paddingX + element.Column * _cellSize,
                                          _paddingY + element.Row * _cellSize,
                                          _cellSize, _cellSize);
                 }

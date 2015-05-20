@@ -45,7 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\TopPlayer.cs" />
+    <Compile Include="Helpers\TopPlayer.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="LevelSelectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +67,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SelectGameTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectGameTypeForm.Designer.cs">
+      <DependentUpon>SelectGameTypeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TopPlayersForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,10 +90,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="SelectGameTypeForm.resx">
+      <DependentUpon>SelectGameTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TopPlayersForm.resx">
       <DependentUpon>TopPlayersForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Levels\Levels.slc" />
+    <None Include="Levels\Standart.slc" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
