@@ -96,6 +96,10 @@
     <EmbeddedResource Include="TopPlayersForm.resx">
       <DependentUpon>TopPlayersForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="bin\Debug\Levels\Levels.slc" />
+    <None Include="bin\Debug\Sokoban.Presentation.exe.config" />
+    <None Include="bin\Debug\Sokoban.Presentation.vshost.exe.config" />
+    <None Include="bin\Debug\Sokoban.Presentation.vshost.exe.manifest" />
     <None Include="Levels\Levels.slc" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -132,6 +136,11 @@
     <None Include="Resources\Goal.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\Sokoban.Logic.dll" />
+    <Content Include="bin\Debug\Sokoban.Logic.pdb" />
+    <Content Include="bin\Debug\Sokoban.Presentation.exe" />
+    <Content Include="bin\Debug\Sokoban.Presentation.pdb" />
+    <Content Include="bin\Debug\Sokoban.Presentation.vshost.exe" />
     <Content Include="Resources\Points.png" />
     <Content Include="Resources\Time.png" />
   </ItemGroup>
