@@ -212,7 +212,7 @@ namespace Sokoban.Logic
         {
             if (game == GameType.Standart)
             {
-                this.SelectedCollection = this.Collections.FirstOrDefault(x => x.CollectionName == "Standart");
+                this.SelectedCollection = this.Collections.FirstOrDefault(); //x => x.CollectionName == "Levels"
                 if (this.SelectedCollection == null)
                 {
                     throw new ArgumentNullException("Избраната колекция е празна!");
