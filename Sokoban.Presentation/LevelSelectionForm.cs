@@ -46,7 +46,7 @@ namespace Sokoban.Presentation
         private void LevelSelectionForm_Load(object sender, EventArgs e)
         {
             string cwd = Directory.GetCurrentDirectory();
-            _file = cwd + @"\\Levels\\Levels.slc";
+            _file = Path.GetFullPath("..\\..\\Levels\\Levels.slc");
             var selectedLevelCollection = new LevelCollection(_file);
             for (int i = 1; i <= selectedLevelCollection.NumberOfLevels; i++)
             {
