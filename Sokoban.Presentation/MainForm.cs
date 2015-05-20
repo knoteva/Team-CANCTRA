@@ -153,6 +153,12 @@ namespace Sokoban.Presentation
                         case ElementType.PlayerOnGoal:
                             imageToDraw = Properties.Resources.Player;
                             break;
+                        case ElementType.BonusTime:
+                            imageToDraw = Properties.Resources.Time;
+                            break;
+                        case ElementType.BonusPoints:
+                            imageToDraw = Properties.Resources.Points;
+                            break;
                     }
 
                     if (imageToDraw != null)
