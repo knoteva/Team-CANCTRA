@@ -58,12 +58,20 @@ namespace Sokoban.Presentation
             this.Model.LevelCompleted += Model_LevelCompleted;
         }
 
+        void timer1_Tick(object sender, EventArgs e)
+        {
+            this.Model.TimeLeft--;
+            this.timerLabel.Text = this.Model.TimeLeft.ToString().PadLeft(2, '0');
+            if (this.Model.TimeLeft <= 0)
+            {
+                timer1.Stop();
+            }
+        }
+
         void Model_LevelCompleted(object sender, EventArgs e)
         {
-            //_isLevelComplete = true;
-            // undoMenuItem.Enabled = false;
             undoButton.Enabled = false;
-            //_currentLevel++;
+            pointsLabel.Text = this.Model.Score.ToString();
             this.Model.NextLevel();
             if (this.Model.IsLastLevel)
             {
@@ -122,7 +130,7 @@ namespace Sokoban.Presentation
 
                 if (hasMoved)
                 {
-                    // undoMenuItem.Enabled = true;
+                    this.pointsLabel.Text = this.Model.Score.ToString();
                     undoButton.Enabled = true;
                 }
 
@@ -234,8 +242,12 @@ namespace Sokoban.Presentation
             var game = SelectGameTypeForm.ShowForm();
             if (GameType.Standart == game)
             {
-                this.Model.StartNewGame(game);
+                this.Model.StartStandartGame();
                 GoToLevel(this.Model.CurrentLevel);
+                timer1.Interval = 1000;
+                timer1.Start();
+                timer1.Tick += timer1_Tick;
+                timer1.Start();
             }
             else if (GameType.Practice == game)
             {
@@ -249,6 +261,7 @@ namespace Sokoban.Presentation
             }
         }
 
+        
         private void GoToLevel(int levelNumber)
         {
             this.Model.LoadLevel(levelNumber);

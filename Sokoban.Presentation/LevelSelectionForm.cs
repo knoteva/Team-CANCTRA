@@ -25,7 +25,7 @@ namespace Sokoban.Presentation
         {
             SelectedLevel = levelSelectionGrid.CurrentRow.Index + 1;
 
-             soko.SetCurrentLevel(SelectedLevel);
+            soko.SetCurrentLevel(SelectedLevel);
             soko.LoadLevel(SelectedLevel);
 
             _cellSize = levelPreview.Width / Math.Max(soko.Width, soko.Height);
@@ -98,6 +98,7 @@ namespace Sokoban.Presentation
         private void btnCancel_Click(object sender, EventArgs e)
         {
             soko.SetCurrentLevel(0);
+            soko.IsPlaying = false;
             this.Close();
         }
 

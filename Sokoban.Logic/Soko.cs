@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Activation;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 
@@ -28,6 +29,8 @@ namespace Sokoban.Logic
         public bool IsPlaying { get; set; }
         public bool IsLastLevel { get; set; }
         public bool IsLevelCompleted { get; set; }
+        public int Score { get; set; }
+        public int TimeLeft { get; set; }
 
         public enum MoveDirection
         {
@@ -143,6 +146,16 @@ namespace Sokoban.Logic
                                 _level[newPlayerRow][newPlayerCol].Type == ElementType.BoxOnGoal;
             bool boxCanMove = isTryMoveBox && (_level[newBoxRow][newBoxCol].Type == ElementType.Floor || _level[newBoxRow][newBoxCol].Type == ElementType.Goal);
 
+            if (_level[newPlayerRow][newPlayerCol].Type == ElementType.BonusPoints)
+            {
+                this.Score += 10;
+            }
+
+            if (_level[newPlayerRow][newPlayerCol].Type == ElementType.BonusTime)
+            {
+                this.TimeLeft += 10;
+            }
+
             if (!isWallThere && !(isTryMoveBox && !boxCanMove))
             {
                 List<Element> elementsList = new List<Element>()
@@ -154,6 +167,9 @@ namespace Sokoban.Logic
                 _level[_player.Row][_player.Column].Type = _level[_player.Row][_player.Column].Type == ElementType.PlayerOnGoal ? ElementType.Goal : ElementType.Floor;
 
                 // TODO if for coins and time
+
+
+
                 if (_level[newPlayerRow][newPlayerCol].Type == ElementType.Goal ||
                     _level[newPlayerRow][newPlayerCol].Type == ElementType.BoxOnGoal)
                 {
@@ -180,6 +196,7 @@ namespace Sokoban.Logic
 
                         if (_goalsFilled == _goalsCount && LevelCompleted != null)
                         {
+                            this.Score += _goalsFilled * 10 + (this.TimeLeft * 2);
                             this.IsLevelCompleted = true;
                             if (this.CurrentLevel + 1 == this.SelectedCollection.NumberOfLevels)
                             {
@@ -222,22 +239,15 @@ namespace Sokoban.Logic
         /// Прави нова игра като започва от 1 ниво
         /// </summary>
         /// <param name="game">Тип на играта(Стандартна или Практикувай)</param>
-        public void StartNewGame(GameType game)
+        public void StartStandartGame()
         {
-            if (game == GameType.Standart)
+            if (this.SelectedCollection == null)
             {
-                if (this.SelectedCollection == null)
-                {
-                    throw new ArgumentNullException("Избраната колекция е празна!");
-                }
-                this.CurrentLevel = 1;
-                this.LoadLevel(CurrentLevel);
+                throw new ArgumentNullException("Избраната колекция е празна!");
             }
-            else if (game == GameType.Practice)
-            {
-
-            }
-
+            this.CurrentLevel = 1;
+            this.Score = 0;
+            this.TimeLeft = 120;
             IsPlaying = true;
         }
 
@@ -283,11 +293,14 @@ namespace Sokoban.Logic
         public void StartPractice()
         {
             this.IsPlaying = true;
+            this.Score = 0;
         }
 
         public void SetCurrentLevel(int current)
         {
             this.CurrentLevel = current;
         }
+
+
     }
 }

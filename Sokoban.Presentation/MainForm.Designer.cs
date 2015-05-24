@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.startMenu = new System.Windows.Forms.MenuStrip();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +50,7 @@
             this.undoButton = new System.Windows.Forms.ToolStripButton();
             this.backgroundPanel = new System.Windows.Forms.Panel();
             this.drawingArea = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.startMenu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.actionMenu.SuspendLayout();
@@ -79,13 +81,13 @@
             // newGameMenuItem
             // 
             this.newGameMenuItem.Name = "newGameMenuItem";
-            this.newGameMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newGameMenuItem.Size = new System.Drawing.Size(131, 22);
             this.newGameMenuItem.Text = "New game";
             // 
             // exitMenuItem
             // 
             this.exitMenuItem.Name = "exitMenuItem";
-            this.exitMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitMenuItem.Size = new System.Drawing.Size(131, 22);
             this.exitMenuItem.Text = "Exit";
             // 
             // topRankingMenuItem
@@ -159,8 +161,8 @@
             // timerLabel
             // 
             this.timerLabel.Name = "timerLabel";
-            this.timerLabel.Size = new System.Drawing.Size(34, 17);
-            this.timerLabel.Text = "00:00";
+            this.timerLabel.Size = new System.Drawing.Size(19, 17);
+            this.timerLabel.Text = "00";
             // 
             // toolStripStatusLabel8
             // 
@@ -275,6 +277,7 @@
         private System.Windows.Forms.ToolStripButton undoButton;
         private System.Windows.Forms.Panel backgroundPanel;
         private System.Windows.Forms.PictureBox drawingArea;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
