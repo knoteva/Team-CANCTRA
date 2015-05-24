@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 using Sokoban.Logic;
 
 
@@ -20,19 +13,20 @@ namespace Sokoban.Presentation
         int _cellSize;
         int _paddingX;
         int _paddingY;
-        string _file;
+
         public LevelSelectionForm()
         {
             InitializeComponent();
+
             soko = new Soko();
         }
 
         private void levelSelectionGrid_SelectionChanged(object sender, EventArgs e)
         {
-            SelectedLevel = levelSelectionGrid.CurrentRow.Index;
+            SelectedLevel = levelSelectionGrid.CurrentRow.Index + 1;
 
-            LevelCollection selectedLevelCollection = new LevelCollection(_file);
-            soko.LoadLevel(selectedLevelCollection[SelectedLevel]);
+             soko.SetCurrentLevel(SelectedLevel);
+            soko.LoadLevel(SelectedLevel);
 
             _cellSize = levelPreview.Width / Math.Max(soko.Width, soko.Height);
             _paddingX = (levelPreview.Width - (soko.Width * _cellSize)) / 2;
@@ -45,10 +39,7 @@ namespace Sokoban.Presentation
 
         private void LevelSelectionForm_Load(object sender, EventArgs e)
         {
-            string cwd = Directory.GetCurrentDirectory();
-            _file = Path.GetFullPath("..\\..\\Levels\\Levels.slc");
-            var selectedLevelCollection = new LevelCollection(_file);
-            for (int i = 1; i <= selectedLevelCollection.NumberOfLevels; i++)
+            for (int i = 1; i <= this.soko.SelectedCollection.NumberOfLevels; i++)
             {
                 levelSelectionGrid.Rows.Add("Level " + i);
             }
@@ -83,7 +74,7 @@ namespace Sokoban.Presentation
                     case ElementType.BonusPoints:
                         img = Properties.Resources.Points;
                         break;
-                    
+
                 }
 
                 if (img != null)
@@ -95,6 +86,20 @@ namespace Sokoban.Presentation
             }
         }
 
+        public static DialogResult ShowForm(Soko model)
+        {
+            using (LevelSelectionForm form = new LevelSelectionForm())
+            {
+                form.soko = model;
+                return form.ShowDialog();
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            soko.SetCurrentLevel(0);
+            this.Close();
+        }
 
     }
 }

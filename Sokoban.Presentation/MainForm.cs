@@ -14,6 +14,7 @@ namespace Sokoban.Presentation
 {
     public partial class MainForm : Form
     {
+        #region Variables
         public Soko Model { get; set; }
 
         private int _paddingX;
@@ -28,9 +29,7 @@ namespace Sokoban.Presentation
         private readonly int _defaultBackgroundPanelWidth;
         private readonly int _defaultBackgroundPanelHeight;
 
-        // private bool _isLevelComplete;
-        // private bool _isLastLevel;
-        //private int _currentLevel;
+        #endregion Variables
 
         public MainForm()
         {
@@ -45,13 +44,13 @@ namespace Sokoban.Presentation
             this.undoButton.Click += undoButton_Click;
             this.restartButton.Click += restartButton_Click;
             this.newGameMenuItem.Click += newGameMenuItem_Click;
-            this.changeLevelMenuItem.Click += changeLevelMenuItem_Click;
             this.exitMenuItem.Click += exitMenuItem_Click;
-            this.topRankingMenuItem.Click += topRankingMenuItem_Click;
             this.drawingArea.Paint += drawingArea_Paint;
             this.KeyDown += MainForm_KeyDown;
             this.Load += MainForm_Load;
         }
+
+        #region Events
 
         void MainForm_Load(object sender, EventArgs e)
         {
@@ -174,17 +173,28 @@ namespace Sokoban.Presentation
 
         void topRankingMenuItem_Click(object sender, EventArgs e)
         {
+            TopPlayersForm tops = new TopPlayersForm();
+            if (tops.ShowDialog() == DialogResult.Cancel)
+            {
 
+            }
         }
 
         void exitMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
-
-        void changeLevelMenuItem_Click(object sender, EventArgs e)
-        {
-
+            if (this.Model.IsPlaying)
+            {
+                if (DialogResult.Yes ==
+                    MessageBox.Show("Сигурни ли сте, че искате да затворите играта?", "Внимание",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    this.Close();
+                }
+            }
+            else
+            {
+                this.Close();
+            }
         }
 
         void newGameMenuItem_Click(object sender, EventArgs e)
@@ -205,16 +215,6 @@ namespace Sokoban.Presentation
 
         }
 
-        private void StartGame()
-        {
-            var game = SelectGameTypeForm.ShowForm();
-            if (GameType.None != game)
-            {
-                this.Model.StartNewGame(game);
-                GoToLevel(this.Model.CurrentLevel);
-            }
-        }
-
         void restartButton_Click(object sender, EventArgs e)
         {
             RestartLevel();
@@ -223,6 +223,30 @@ namespace Sokoban.Presentation
         void undoButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        #endregion Events
+
+        #region Methods
+
+        private void StartGame()
+        {
+            var game = SelectGameTypeForm.ShowForm();
+            if (GameType.Standart == game)
+            {
+                this.Model.StartNewGame(game);
+                GoToLevel(this.Model.CurrentLevel);
+            }
+            else if (GameType.Practice == game)
+            {
+                this.Model.SetCurrentLevel(1);
+
+                if (DialogResult.OK == LevelSelectionForm.ShowForm(this.Model))
+                {
+                    this.Model.StartPractice();
+                    GoToLevel(this.Model.CurrentLevel);
+                }
+            }
         }
 
         private void GoToLevel(int levelNumber)
@@ -266,22 +290,6 @@ namespace Sokoban.Presentation
             GoToLevel(this.Model.CurrentLevel);
         }
 
-        private void levelSelectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LevelSelectionForm levelSelectionForm = new LevelSelectionForm();
-            if (levelSelectionForm.ShowDialog() == DialogResult.OK)
-            {
-
-            }
-        }
-
-        private void topRankingMenuItem_Click_1(object sender, EventArgs e)
-        {
-            TopPlayersForm tops = new TopPlayersForm();
-            if (tops.ShowDialog() == DialogResult.Cancel)
-            {
-
-            }
-        }
+        #endregion Methods
     }
 }

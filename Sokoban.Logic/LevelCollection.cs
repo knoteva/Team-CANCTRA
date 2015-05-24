@@ -57,45 +57,5 @@ namespace Sokoban.Logic
 
             return new Level() { Data = levelData, Width = levelWidth, Height = levelHeight };
         }
-
-
-        //public void Test(int levelNumber)
-        //{
-        //    var level = _levelsFile.Descendants("Level").Skip(levelNumber).First().Elements();
-        //    int levelWidth = (from row in level select row.Value.Length).Max();
-
-        //    int levelHeight = level.Count();
-
-        //    string[] levelData = new string[levelHeight];
-        //    int rowNumber = 0;
-        //    foreach (var row in level)
-        //    {
-        //        levelData[rowNumber] += row.Value;
-        //        rowNumber++;
-        //    }
-
-        //    Level ssr = new Level() { Data = levelData, Width = levelWidth, Height = levelHeight };
-        //}
-
-        //public static string InnerXml(XElement element)
-        //{
-        //    StringBuilder innerXml = new StringBuilder();
-        //    element.Nodes().ToList().ForEach(node => innerXml.AppendLine(node.ToString()));
-        //    return innerXml.ToString();
-
-        //    Test(levelNumber);
-        //    var level = _levelsFile.Descendants("Level").Skip(levelNumber).First().Elements();
-        //    int levelWidth = (from row in level select row.Value.Length).Max();
-
-        //    int levelHeight = level.Count();
-
-        //    string[] levelData = new string[levelHeight];
-        //    int rowNumber = 0;
-        //    foreach (var row in level)
-        //    {
-        //        levelData[rowNumber] += row.Value;
-        //        rowNumber++;
-        //    }
-        //}
     }
 }

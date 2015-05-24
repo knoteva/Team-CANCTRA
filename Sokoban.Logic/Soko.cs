@@ -16,7 +16,7 @@ namespace Sokoban.Logic
         {
             this.Collections = new List<LevelCollection>();
             this.Collections = GetCollections();
-            this.SelectedCollection = new LevelCollection();
+            this.SelectedCollection = this.Collections.FirstOrDefault();
         }
         #region Variables
 
@@ -226,7 +226,6 @@ namespace Sokoban.Logic
         {
             if (game == GameType.Standart)
             {
-                this.SelectedCollection = this.Collections.FirstOrDefault();
                 if (this.SelectedCollection == null)
                 {
                     throw new ArgumentNullException("Избраната колекция е празна!");
@@ -256,7 +255,6 @@ namespace Sokoban.Logic
         /// <param name="levelNumber">Номер на нивото</param>
         public void LoadLevel(int levelNumber)
         {
-            this.CurrentLevel = levelNumber;
             this.LoadLevel(this.SelectedCollection[CurrentLevel]);
         }
 
@@ -280,6 +278,16 @@ namespace Sokoban.Logic
         public IEnumerator GetEnumerator()
         {
             return _level.SelectMany(row => row).GetEnumerator();
+        }
+
+        public void StartPractice()
+        {
+            this.IsPlaying = true;
+        }
+
+        public void SetCurrentLevel(int current)
+        {
+            this.CurrentLevel = current;
         }
     }
 }

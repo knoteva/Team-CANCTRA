@@ -31,9 +31,7 @@
             this.startMenu = new System.Windows.Forms.MenuStrip();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeLevelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.levelSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topRankingMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -62,7 +60,6 @@
             // 
             this.startMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startToolStripMenuItem,
-            this.levelSelectionToolStripMenuItem,
             this.topRankingMenuItem});
             this.startMenu.Location = new System.Drawing.Point(0, 0);
             this.startMenu.Name = "startMenu";
@@ -74,7 +71,6 @@
             // 
             this.startToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newGameMenuItem,
-            this.changeLevelMenuItem,
             this.exitMenuItem});
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
             this.startToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
@@ -83,34 +79,21 @@
             // newGameMenuItem
             // 
             this.newGameMenuItem.Name = "newGameMenuItem";
-            this.newGameMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.newGameMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newGameMenuItem.Text = "New game";
-            // 
-            // changeLevelMenuItem
-            // 
-            this.changeLevelMenuItem.Name = "changeLevelMenuItem";
-            this.changeLevelMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.changeLevelMenuItem.Text = "Change level";
             // 
             // exitMenuItem
             // 
             this.exitMenuItem.Name = "exitMenuItem";
-            this.exitMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.exitMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitMenuItem.Text = "Exit";
-            // 
-            // levelSelectionToolStripMenuItem
-            // 
-            this.levelSelectionToolStripMenuItem.Name = "levelSelectionToolStripMenuItem";
-            this.levelSelectionToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
-            this.levelSelectionToolStripMenuItem.Text = "Level selection";
-            this.levelSelectionToolStripMenuItem.Click += new System.EventHandler(this.levelSelectionToolStripMenuItem_Click);
             // 
             // topRankingMenuItem
             // 
             this.topRankingMenuItem.Name = "topRankingMenuItem";
             this.topRankingMenuItem.Size = new System.Drawing.Size(55, 20);
             this.topRankingMenuItem.Text = "Top 10";
-            this.topRankingMenuItem.Click += new System.EventHandler(this.topRankingMenuItem_Click_1);
+            this.topRankingMenuItem.Click += new System.EventHandler(this.topRankingMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -273,7 +256,6 @@
 
         private System.Windows.Forms.MenuStrip startMenu;
         private System.Windows.Forms.ToolStripMenuItem startToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem levelSelectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem topRankingMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
@@ -287,7 +269,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
         private System.Windows.Forms.ToolStripStatusLabel pointsLabel;
         private System.Windows.Forms.ToolStripMenuItem newGameMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem changeLevelMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
         private System.Windows.Forms.ToolStrip actionMenu;
         private System.Windows.Forms.ToolStripButton restartButton;
