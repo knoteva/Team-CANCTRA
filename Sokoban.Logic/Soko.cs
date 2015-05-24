@@ -18,16 +18,16 @@ namespace Sokoban.Logic
             this.Collections = GetCollections();
             this.SelectedCollection = new LevelCollection();
         }
-        public IEnumerator GetEnumerator()
-        {
-            return _level.SelectMany(row => row).GetEnumerator();
-        }
+        #region Variables
 
         public int Width { get; private set; }
         public int Height { get; private set; }
         public List<LevelCollection> Collections { get; set; }
         public LevelCollection SelectedCollection { get; set; }
         public int CurrentLevel { get; private set; }
+        public bool IsPlaying { get; set; }
+        public bool IsLastLevel { get; set; }
+        public bool IsLevelCompleted { get; set; }
 
         public enum MoveDirection
         {
@@ -45,6 +45,12 @@ namespace Sokoban.Logic
         private int _bonusCoins;
         private int _bonusTime;
 
+        #endregion Variables
+
+        /// <summary>
+        /// Зарежда дадено ниво като конвертира символите от картата в конкретни обекти които после ще се визуализират във формата('@' == играча)
+        /// </summary>
+        /// <param name="level">Ниво</param>
         public void LoadLevel(Level level)
         {
             Width = level.Width;
@@ -174,6 +180,12 @@ namespace Sokoban.Logic
 
                         if (_goalsFilled == _goalsCount && LevelCompleted != null)
                         {
+                            this.IsLevelCompleted = true;
+                            if (this.CurrentLevel + 1 == this.SelectedCollection.NumberOfLevels)
+                            {
+                                this.IsLastLevel = true;
+                            }
+
                             LevelCompleted(this, new EventArgs());
                         }
                     }
@@ -189,12 +201,10 @@ namespace Sokoban.Logic
             }
             return hasMoved;
         }
-
-
-
-        public bool IsPlaying { get; set; }
-
-
+        /// <summary>
+        /// Зарежда всички нива от колекцията Levels
+        /// </summary>
+        /// <returns>Списък с колекции</returns>
         private List<LevelCollection> GetCollections()
         {
             string[] files = Directory.GetFiles("Levels");
@@ -208,17 +218,21 @@ namespace Sokoban.Logic
             return levels;
         }
 
+        /// <summary>
+        /// Прави нова игра като започва от 1 ниво
+        /// </summary>
+        /// <param name="game">Тип на играта(Стандартна или Практикувай)</param>
         public void StartNewGame(GameType game)
         {
             if (game == GameType.Standart)
             {
-                this.SelectedCollection = this.Collections.FirstOrDefault(); //x => x.CollectionName == "Levels"
+                this.SelectedCollection = this.Collections.FirstOrDefault();
                 if (this.SelectedCollection == null)
                 {
                     throw new ArgumentNullException("Избраната колекция е празна!");
                 }
-                CurrentLevel = 1;
-                this.LoadLevel(this.SelectedCollection[CurrentLevel]);
+                this.CurrentLevel = 1;
+                this.LoadLevel(CurrentLevel);
             }
             else if (game == GameType.Practice)
             {
@@ -228,26 +242,44 @@ namespace Sokoban.Logic
             IsPlaying = true;
         }
 
-
+        /// <summary>
+        /// Зарежда следващото ниво
+        /// </summary>
         public void NextLevel()
         {
-            this.LoadLevel(this.SelectedCollection[++CurrentLevel]);
+            this.LoadLevel(CurrentLevel + 1);
         }
 
+        /// <summary>
+        /// Зарежда ниво
+        /// </summary>
+        /// <param name="levelNumber">Номер на нивото</param>
         public void LoadLevel(int levelNumber)
         {
             this.CurrentLevel = levelNumber;
             this.LoadLevel(this.SelectedCollection[CurrentLevel]);
         }
 
+        /// <summary>
+        /// Връща макс. дължина на текущото ниво
+        /// </summary>
+        /// <returns>Дължина на нивото</returns>
         public int GetSelectedCollectionWidth()
         {
             return SelectedCollection[CurrentLevel].Width;
         }
-
+        /// <summary>
+        /// Връща макс. височина на текущото ниво
+        /// </summary>
+        /// <returns>Височина на нивото</returns>
         public int GetSelectedCollectionHeight()
         {
             return SelectedCollection[CurrentLevel].Height;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return _level.SelectMany(row => row).GetEnumerator();
         }
     }
 }

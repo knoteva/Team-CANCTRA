@@ -28,9 +28,9 @@ namespace Sokoban.Presentation
         private readonly int _defaultBackgroundPanelWidth;
         private readonly int _defaultBackgroundPanelHeight;
 
-        private bool _isLevelComplete;
-        private bool _isLastLevel;
-        private int _currentLevel;
+        // private bool _isLevelComplete;
+        // private bool _isLastLevel;
+        //private int _currentLevel;
 
         public MainForm()
         {
@@ -61,14 +61,14 @@ namespace Sokoban.Presentation
 
         void Model_LevelCompleted(object sender, EventArgs e)
         {
-            _isLevelComplete = true;
+            //_isLevelComplete = true;
             // undoMenuItem.Enabled = false;
             undoButton.Enabled = false;
-            _currentLevel++;
-            if (this.Model.CurrentLevel + 1 == this.Model.SelectedCollection.NumberOfLevels)
+            //_currentLevel++;
+            this.Model.NextLevel();
+            if (this.Model.IsLastLevel)
             {
                 statusLabel.Text = "Level Completed! No more levels in the collection.";
-                _isLastLevel = true;
             }
             else
             {
@@ -85,11 +85,11 @@ namespace Sokoban.Presentation
                 return;
             }
 
-            if (_isLevelComplete)
+            if (this.Model.IsLevelCompleted)
             {
-                if (!_isLastLevel && e.KeyCode == Keys.Enter)
+                if (!this.Model.IsLastLevel && e.KeyCode == Keys.Enter)
                 {
-                    GoToLevel(_currentLevel);
+                    GoToLevel(this.Model.CurrentLevel);
                 }
             }
             else
@@ -112,7 +112,9 @@ namespace Sokoban.Presentation
                         break;
                     case Keys.Space:
                         // for testing...
-                        GoToLevel(_currentLevel);
+                        //this.Model.IsLevelCompleted = true;
+                        //this.Model._goalsFilled = 10;
+                        // GoToLevel(this.Model.CurrentLevel+1);
                         break;
                     case Keys.Back:
                         //UndoMovement();
@@ -206,11 +208,10 @@ namespace Sokoban.Presentation
         private void StartGame()
         {
             var game = SelectGameTypeForm.ShowForm();
-            _currentLevel = 0;
             if (GameType.None != game)
             {
                 this.Model.StartNewGame(game);
-                GoToLevel(_currentLevel);
+                GoToLevel(this.Model.CurrentLevel);
             }
         }
 
@@ -246,11 +247,11 @@ namespace Sokoban.Presentation
             int y = backgroundPanel.Size.Height / 2 - drawingArea.Size.Height / 2;
             drawingArea.Location = new Point(x, y);
 
-            _isLevelComplete = false;
+            this.Model.IsLevelCompleted = false;
 
             statusLabel.Text = "Playing";
             //levelCollectionLabel.Text = _levelCollection.Title;
-            levelLabel.Text = string.Format("{0} of {1}", this.Model.CurrentLevel + 1, this.Model.SelectedCollection.NumberOfLevels);
+            levelLabel.Text = string.Format("{0} of {1}", this.Model.CurrentLevel, this.Model.SelectedCollection.NumberOfLevels);
 
 
             restartButton.Enabled = true;

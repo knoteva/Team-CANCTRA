@@ -209,7 +209,7 @@
             this.restartButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.restartButton.Name = "restartButton";
             this.restartButton.Size = new System.Drawing.Size(23, 22);
-            this.restartButton.Text = "restartButton";
+            this.restartButton.Text = "Restart";
             // 
             // undoButton
             // 
@@ -218,7 +218,7 @@
             this.undoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.undoButton.Name = "undoButton";
             this.undoButton.Size = new System.Drawing.Size(23, 22);
-            this.undoButton.Text = "undoButton";
+            this.undoButton.Text = "Undo";
             // 
             // backgroundPanel
             // 
