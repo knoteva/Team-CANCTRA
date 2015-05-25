@@ -60,6 +60,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NamePromptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NamePromptForm.Designer.cs">
+      <DependentUpon>NamePromptForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -84,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NamePromptForm.resx">
+      <DependentUpon>NamePromptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
@@ -141,9 +150,11 @@
     <Content Include="bin\Debug\Sokoban.Presentation.exe" />
     <Content Include="bin\Debug\Sokoban.Presentation.pdb" />
     <Content Include="bin\Debug\Sokoban.Presentation.vshost.exe" />
+    <None Include="bin\Debug\TopPlayers\topPlayers.txt" />
     <Content Include="Resources\Points.png" />
     <Content Include="Resources\Time.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

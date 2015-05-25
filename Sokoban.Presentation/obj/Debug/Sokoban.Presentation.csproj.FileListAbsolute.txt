@@ -61,3 +61,4 @@ C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\De
 C:\Users\Katerina\Desktop\TeamCanctra\Сокобан\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.pdb
 D:\Lessons\Sokoban\trunk\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.SelectGameTypeForm.resources
 C:\Users\Administrator\Documents\GitHub\Team-CANCTRA\Team-CANCTRA\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.SelectGameTypeForm.resources
+C:\Users\Administrator\Documents\GitHub\Team-CANCTRA\Team-CANCTRA\Sokoban.Presentation\obj\Debug\Sokoban.Presentation.NamePromptForm.resources

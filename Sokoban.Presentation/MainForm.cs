@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sokoban.Logic;
 using Sokoban.Presentation.Helpers;
+using System.IO;
 
 namespace Sokoban.Presentation
 {
@@ -74,9 +75,18 @@ namespace Sokoban.Presentation
             undoButton.Enabled = false;
             pointsLabel.Text = this.Model.TotalScore.ToString();
             timer1.Stop();
+
             if (this.Model.IsLastLevel)
             {
                 statusLabel.Text = "Level Completed! No more levels in the collection.";
+
+                //top score check call
+                if (checkIfTopScore(this.Model.TotalScore))
+                {
+                    showNamePromptForm();
+                }
+                
+                
             }
             else
             {
@@ -194,6 +204,7 @@ namespace Sokoban.Presentation
             }
         }
 
+        
         void exitMenuItem_Click(object sender, EventArgs e)
         {
             if (this.Model.IsPlaying)
@@ -313,6 +324,41 @@ namespace Sokoban.Presentation
             StartLevel();
             StartTimer();
             this.pointsLabel.Text = this.Model.StartScore.ToString();
+        }
+
+        static bool checkIfTopScore(int score)
+        {
+            string dirPath = Path.GetFullPath("TopPlayers");
+            string path = (Path.GetFullPath("TopPlayers\\topPlayers.txt"));
+            if (!Directory.Exists(dirPath) || !File.Exists(path))
+            {
+                return true;
+            }
+            else
+            {
+                string[] lines = File.ReadAllLines(path);
+                foreach (string line in lines)
+                {
+                    int scoreFromList;
+                    bool result = Int32.TryParse(line.Split(' ')[0], out scoreFromList);
+                    if (result)
+                    {
+                        if (scoreFromList <= score)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        void showNamePromptForm()
+        {
+            NamePromptForm npf = new NamePromptForm();
+            npf.score = this.Model.TotalScore;
+            npf.ShowDialog();
         }
 
         #endregion Methods

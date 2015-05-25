@@ -5,51 +5,50 @@ using System.Windows.Forms;
 using System.Resources;
 using System.Collections;
 using Sokoban.Presentation.Helpers;
+using System.IO;
 
 namespace Sokoban.Presentation
 {
     public partial class TopPlayersForm : Form
     {
+
+        private List<TopPlayer> players = new List<TopPlayer>();
+        private TopPlayer tp;
+
         public TopPlayersForm()
         {
             InitializeComponent();
-            List<TopPlayer> players = new List<TopPlayer>();
-            try
+            tp = new TopPlayer();
+
+            //Create directory if it does not exst
+            if (!Directory.Exists(Path.GetFullPath("TopPlayers")))
             {
-                string resxFile = @".\topPlayersResources.resx";
-                using (ResXResourceReader resxReader = new ResXResourceReader(resxFile))
-                {
-                    foreach (DictionaryEntry entry in resxReader)
-                    {
-                        if (((string)entry.Key).StartsWith("Player"))
-                            players.Add((TopPlayer)entry.Value);
-
-                    }
-                }
-                if (players.Count < 10)
-                {
-                    for (int i = players.Count; i < 10; i++)
-                    {
-                        TopPlayer np = new TopPlayer();
-                        np.Name = "bob";
-                        np.Score = "0";
-                        players.Add(np);
-                    }
-
-                }
+                Directory.CreateDirectory(Path.GetFullPath("TopPlayers"));
             }
-            catch
+            string path = Path.GetFullPath("TopPlayers\\topPlayers.txt");
+            string[] lines = new string[10] { "0 bob", "0 bob", "0 bob", "0 bob", "0 bob", "0 bob", "0 bob", "0 bob", "0 bob", "0 bob" };
+            //Create file if it does not exist
+            if (!File.Exists(path))
             {
-                for (int i = 0; i < 10; i++)
-                {
-                    TopPlayer np = new TopPlayer();
-                    np.Name = "bob";
-                    np.Score = "0";
-                    players.Add(np);
-                }
-
+                File.Create(path).Close();
+                File.WriteAllLines(path, lines);
+            }
+            else
+            {
+                lines = File.ReadAllLines(Path.GetFullPath("TopPlayers\\topPlayers.txt"));
             }
 
+            //fill array with top players
+            foreach (string line in lines)
+            {
+                string[] p = line.Split(' ');
+                tp = new TopPlayer();
+                tp.Name = p[1];
+                tp.Score = p[0];
+                players.Add(tp);
+            }
+
+            //bind array to datagridview
             playersGrid.DataSource = new BindingList<TopPlayer>(players);
         }
 
