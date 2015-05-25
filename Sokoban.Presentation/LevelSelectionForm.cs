@@ -26,7 +26,7 @@ namespace Sokoban.Presentation
             SelectedLevel = levelSelectionGrid.CurrentRow.Index + 1;
 
             soko.SetCurrentLevel(SelectedLevel);
-            soko.LoadLevel(SelectedLevel);
+            soko.LoadLevel();
 
             _cellSize = levelPreview.Width / Math.Max(soko.Width, soko.Height);
             _paddingX = (levelPreview.Width - (soko.Width * _cellSize)) / 2;

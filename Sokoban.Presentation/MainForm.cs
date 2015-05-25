@@ -48,6 +48,7 @@ namespace Sokoban.Presentation
             this.drawingArea.Paint += drawingArea_Paint;
             this.KeyDown += MainForm_KeyDown;
             this.Load += MainForm_Load;
+            this.timer1.Tick += timer1_Tick;
         }
 
         #region Events
@@ -71,8 +72,8 @@ namespace Sokoban.Presentation
         void Model_LevelCompleted(object sender, EventArgs e)
         {
             undoButton.Enabled = false;
-            pointsLabel.Text = this.Model.Score.ToString();
-            this.Model.NextLevel();
+            pointsLabel.Text = this.Model.TotalScore.ToString();
+            timer1.Stop();
             if (this.Model.IsLastLevel)
             {
                 statusLabel.Text = "Level Completed! No more levels in the collection.";
@@ -96,7 +97,9 @@ namespace Sokoban.Presentation
             {
                 if (!this.Model.IsLastLevel && e.KeyCode == Keys.Enter)
                 {
-                    GoToLevel(this.Model.CurrentLevel);
+                    this.Model.NextLevel();
+                    StartLevel();
+                    StartTimer();
                 }
             }
             else
@@ -121,7 +124,10 @@ namespace Sokoban.Presentation
                         // for testing...
                         //this.Model.IsLevelCompleted = true;
                         //this.Model._goalsFilled = 10;
-                        // GoToLevel(this.Model.CurrentLevel+1);
+                        //if (this.Model.IsLevelCompleted && !this.Model.IsLastLevel)
+                        //{
+                        //    this.Model.NextLevel();
+                        //}
                         break;
                     case Keys.Back:
                         //UndoMovement();
@@ -130,7 +136,7 @@ namespace Sokoban.Presentation
 
                 if (hasMoved)
                 {
-                    this.pointsLabel.Text = this.Model.Score.ToString();
+                    this.pointsLabel.Text = this.Model.StartScore.ToString();
                     undoButton.Enabled = true;
                 }
 
@@ -226,6 +232,7 @@ namespace Sokoban.Presentation
         void restartButton_Click(object sender, EventArgs e)
         {
             RestartLevel();
+            StartTimer();
         }
 
         void undoButton_Click(object sender, EventArgs e)
@@ -243,11 +250,8 @@ namespace Sokoban.Presentation
             if (GameType.Standart == game)
             {
                 this.Model.StartStandartGame();
-                GoToLevel(this.Model.CurrentLevel);
-                timer1.Interval = 1000;
-                timer1.Start();
-                timer1.Tick += timer1_Tick;
-                timer1.Start();
+                StartLevel();
+                StartTimer();
             }
             else if (GameType.Practice == game)
             {
@@ -256,16 +260,21 @@ namespace Sokoban.Presentation
                 if (DialogResult.OK == LevelSelectionForm.ShowForm(this.Model))
                 {
                     this.Model.StartPractice();
-                    GoToLevel(this.Model.CurrentLevel);
+                    StartLevel();
                 }
             }
         }
 
-        
-        private void GoToLevel(int levelNumber)
+        private void StartTimer()
         {
-            this.Model.LoadLevel(levelNumber);
+            timer1.Stop();
+            timer1.Interval = 1000;
+            timer1.Start();
+        }
 
+
+        private void StartLevel()
+        {
             drawingArea.Width = this.Model.GetSelectedCollectionWidth() * _cellSize;
             drawingArea.Height = this.Model.GetSelectedCollectionHeight() * _cellSize;
 
@@ -300,7 +309,10 @@ namespace Sokoban.Presentation
 
         private void RestartLevel()
         {
-            GoToLevel(this.Model.CurrentLevel);
+            this.Model.RestartLevel();
+            StartLevel();
+            StartTimer();
+            this.pointsLabel.Text = this.Model.StartScore.ToString();
         }
 
         #endregion Methods

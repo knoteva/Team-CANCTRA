@@ -130,9 +130,8 @@
             // 
             // toolStripStatusLabel1
             // 
-            this.toolStripStatusLabel1.AutoSize = false;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(350, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
             this.toolStripStatusLabel1.Text = " ";
             // 
             // toolStripStatusLabel3
@@ -173,8 +172,8 @@
             // pointsLabel
             // 
             this.pointsLabel.Name = "pointsLabel";
-            this.pointsLabel.Size = new System.Drawing.Size(19, 17);
-            this.pointsLabel.Text = "20";
+            this.pointsLabel.Size = new System.Drawing.Size(13, 17);
+            this.pointsLabel.Text = "0";
             // 
             // actionMenu
             // 
