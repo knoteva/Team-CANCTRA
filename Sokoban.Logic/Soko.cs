@@ -18,7 +18,9 @@ namespace Sokoban.Logic
             this.Collections = new List<LevelCollection>();
             this.Collections = GetCollections();
             this.SelectedCollection = this.Collections.FirstOrDefault();
+            _movesHistory = new Stack<List<Element>>();
         }
+
         #region Variables
 
         public int Width { get; private set; }
@@ -48,6 +50,9 @@ namespace Sokoban.Logic
         private int _goalsFilled;
         private int _bonusCoins;
         private int _bonusTime;
+
+        private Stack<List<Element>> _movesHistory;
+        public int MovesHistoryCount { get { return _movesHistory.Count; } }
 
         #endregion Variables
 
@@ -111,7 +116,7 @@ namespace Sokoban.Logic
                     }
                 }
             }
-            //
+            _movesHistory.Clear();
         }
 
         public bool MovePlayer(MoveDirection moveDirection)
@@ -211,6 +216,7 @@ namespace Sokoban.Logic
                     }
                 }
 
+                _movesHistory.Push(elementsList);
                 _player = _level[newPlayerRow][newPlayerCol];
                 hasMoved = true;
                 //
@@ -316,6 +322,38 @@ namespace Sokoban.Logic
             this.CurrentLevel = current;
         }
 
+        public void UndoMovement()
+        {
+            if (_movesHistory.Count > 0)
+            {
+                List<Element> elementsList = _movesHistory.Pop();
+
+                foreach (var element in elementsList)
+                {
+                    if (element.Type == ElementType.BoxOnGoal)
+                    {
+                        _goalsFilled++;
+                    }
+                    else if (element.Type == ElementType.Goal &&
+                             _level[element.Row][element.Column].Type == ElementType.BoxOnGoal)
+                    {
+                        _goalsFilled--;
+                    }
+                    else if (element.Type == ElementType.BonusPoints)
+                    {
+                        this.StartScore -= 10;
+                    }
+                    else if (element.Type == ElementType.BonusTime)
+                    {
+                        this.TimeLeft -= 10;
+                    }
+
+                    _level[element.Row][element.Column].Type = element.Type;
+                }
+
+                _player = elementsList[0];
+            }
+        }
 
     }
 }

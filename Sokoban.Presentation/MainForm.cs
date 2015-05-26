@@ -81,12 +81,12 @@ namespace Sokoban.Presentation
                 statusLabel.Text = "Level Completed! No more levels in the collection.";
 
                 //top score check call
-                if (checkIfTopScore(this.Model.TotalScore))
+                if (CheckIfTopScore(this.Model.TotalScore))
                 {
-                    showNamePromptForm();
+                    ShowNamePromptForm();
                 }
-                
-                
+
+
             }
             else
             {
@@ -204,7 +204,7 @@ namespace Sokoban.Presentation
             }
         }
 
-        
+
         void exitMenuItem_Click(object sender, EventArgs e)
         {
             if (this.Model.IsPlaying)
@@ -248,7 +248,7 @@ namespace Sokoban.Presentation
 
         void undoButton_Click(object sender, EventArgs e)
         {
-
+            UndoMovement();
         }
 
         #endregion Events
@@ -289,7 +289,6 @@ namespace Sokoban.Presentation
             drawingArea.Width = this.Model.GetSelectedCollectionWidth() * _cellSize;
             drawingArea.Height = this.Model.GetSelectedCollectionHeight() * _cellSize;
 
-            // some code to resize the form to fit the level size, and also to center the level in the form
             int formNewWidth = drawingArea.Width > _defaultBackgroundPanelWidth
                                    ? _defaultFormWidth + drawingArea.Width - _defaultBackgroundPanelWidth + 10
                                    : _defaultFormWidth;
@@ -298,7 +297,6 @@ namespace Sokoban.Presentation
                                     : _defaultFormHeight;
 
             Size = new Size(formNewWidth, formNewHeight);
-            //CenterToScreen();
 
             int x = backgroundPanel.Size.Width / 2 - drawingArea.Size.Width / 2;
             int y = backgroundPanel.Size.Height / 2 - drawingArea.Size.Height / 2;
@@ -307,7 +305,6 @@ namespace Sokoban.Presentation
             this.Model.IsLevelCompleted = false;
 
             statusLabel.Text = "Playing";
-            //levelCollectionLabel.Text = _levelCollection.Title;
             levelLabel.Text = string.Format("{0} of {1}", this.Model.CurrentLevel, this.Model.SelectedCollection.NumberOfLevels);
 
 
@@ -326,7 +323,7 @@ namespace Sokoban.Presentation
             this.pointsLabel.Text = this.Model.StartScore.ToString();
         }
 
-        static bool checkIfTopScore(int score)
+        static bool CheckIfTopScore(int score)
         {
             string dirPath = Path.GetFullPath("TopPlayers");
             string path = (Path.GetFullPath("TopPlayers\\topPlayers.txt"));
@@ -354,11 +351,21 @@ namespace Sokoban.Presentation
             return false;
         }
 
-        void showNamePromptForm()
+        void ShowNamePromptForm()
         {
             NamePromptForm npf = new NamePromptForm();
             npf.score = this.Model.TotalScore;
             npf.ShowDialog();
+        }
+
+        private void UndoMovement()
+        {
+            this.Model.UndoMovement();
+            this.pointsLabel.Text = this.Model.StartScore.ToString();
+            this.timerLabel.Text = this.Model.TimeLeft.ToString();
+            undoButton.Enabled = this.Model.MovesHistoryCount > 0;
+
+            drawingArea.Invalidate();
         }
 
         #endregion Methods
