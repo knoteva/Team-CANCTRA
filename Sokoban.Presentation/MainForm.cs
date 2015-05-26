@@ -132,15 +132,9 @@ namespace Sokoban.Presentation
                         break;
                     case Keys.Space:
                         // for testing...
-                        //this.Model.IsLevelCompleted = true;
-                        //this.Model._goalsFilled = 10;
-                        //if (this.Model.IsLevelCompleted && !this.Model.IsLastLevel)
-                        //{
-                        //    this.Model.NextLevel();
-                        //}
                         break;
                     case Keys.Back:
-                        //UndoMovement();
+                        UndoMovement();
                         break;
                 }
 
@@ -197,11 +191,7 @@ namespace Sokoban.Presentation
 
         void topRankingMenuItem_Click(object sender, EventArgs e)
         {
-            TopPlayersForm tops = new TopPlayersForm();
-            if (tops.ShowDialog() == DialogResult.Cancel)
-            {
-
-            }
+            TopPlayersForm.ShowForm();
         }
 
 

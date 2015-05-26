@@ -66,6 +66,14 @@ namespace Sokoban.Presentation
             }
         }
 
+        public static void ShowForm()
+        {
+            using (TopPlayersForm form = new TopPlayersForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
     }
 
 }
