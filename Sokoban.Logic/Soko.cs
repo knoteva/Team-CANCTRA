@@ -247,7 +247,10 @@ namespace Sokoban.Logic
 
             foreach (string file in files)
             {
-                levels.Add(new LevelCollection(file));
+                if (file.EndsWith(".slc"))
+                {
+                    levels.Add(new LevelCollection(file));
+                }
             }
 
             return levels;
@@ -399,7 +402,6 @@ namespace Sokoban.Logic
 
         public void SavePlayer(string playerName)
         {
-            // string dir = Directory.GetCurrentDirectory();
             string path = Directory.GetCurrentDirectory() + "\\TopPlayers\\topPlayers.txt";
             List<string> lines = new List<string>();
             if (!File.Exists(path))
