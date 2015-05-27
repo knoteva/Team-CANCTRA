@@ -60,6 +60,7 @@ namespace Sokoban.Presentation
 
         void Model_LevelCompleted(object sender, EventArgs e)
         {
+            restartButton.Enabled = false;
             undoButton.Enabled = false;
             pointsLabel.Text = this.Model.TotalScore.ToString();
             timer1.Stop();
@@ -127,7 +128,10 @@ namespace Sokoban.Presentation
                 if (hasMoved)
                 {
                     this.pointsLabel.Text = this.Model.StartScore.ToString();
-                    undoButton.Enabled = true;
+                    if (!this.Model.IsLevelCompleted)
+                    {
+                        undoButton.Enabled = true;
+                    }
                 }
 
                 drawingArea.Invalidate();
