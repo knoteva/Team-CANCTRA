@@ -28,7 +28,9 @@ namespace Sokoban.Presentation
             _defaultBackgroundPanelHeight = backgroundPanel.Height;
 
             this.undoButton.Click += undoButton_Click;
+            this.undoButton.Enabled = false;
             this.restartButton.Click += restartButton_Click;
+            this.restartButton.Enabled = false;
             this.newGameMenuItem.Click += newGameMenuItem_Click;
             this.exitMenuItem.Click += exitMenuItem_Click;
             this.drawingArea.Paint += drawingArea_Paint;
@@ -178,7 +180,6 @@ namespace Sokoban.Presentation
             TopPlayersForm.ShowForm(this.Model.GetTopPlayers());
         }
 
-
         void exitMenuItem_Click(object sender, EventArgs e)
         {
             if (this.Model.IsPlaying)
@@ -291,6 +292,10 @@ namespace Sokoban.Presentation
 
         private void RestartLevel()
         {
+            if (Model.CurrentLevel == 0)
+            {
+                return;
+            }
             this.Model.RestartLevel();
             StartLevel();
             StartTimer();
