@@ -65,7 +65,7 @@ namespace Sokoban.Presentation
             pointsLabel.Text = this.Model.TotalScore.ToString();
             timer1.Stop();
 
-            if (this.Model.IsLastLevel)
+            if (this.Model.GameType == GameType.Standart && this.Model.IsLastLevel)
             {
                 statusLabel.Text = "Level Completed! No more levels in the collection.";
 
@@ -263,6 +263,8 @@ namespace Sokoban.Presentation
                 this.Model.StartStandartGame();
                 StartLevel();
                 StartTimer();
+                pointsLabel.Text = this.Model.TotalScore.ToString();
+                timerLabel.Text = this.Model.TimeLeft.ToString();
             }
             else if (GameType.Practice == this.Model.GameType)
             {
