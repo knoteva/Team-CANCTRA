@@ -72,6 +72,7 @@ namespace Sokoban.Presentation
                 //top score check call
                 if (this.Model.HasTopScore)
                 {
+                    drawingArea.Invalidate();
                     ShowNamePromptForm();
                 }
             }
