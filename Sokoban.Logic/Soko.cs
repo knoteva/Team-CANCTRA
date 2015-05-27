@@ -242,7 +242,7 @@ namespace Sokoban.Logic
         /// <returns>Списък с колекции</returns>
         private List<LevelCollection> GetCollections()
         {
-            string[] files = Directory.GetFiles("..//..//Levels");
+            string[] files = Directory.GetFiles(Directory.GetCurrentDirectory() + "\\Levels");
             List<LevelCollection> levels = new List<LevelCollection>();
 
             foreach (string file in files)
