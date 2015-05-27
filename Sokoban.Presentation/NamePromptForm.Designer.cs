@@ -38,9 +38,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(21, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(370, 13);
+            this.label1.Size = new System.Drawing.Size(349, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Поздравления! Вашият резултат е в TOP10! Моля, въведете името си! ";
+            this.label1.Text = "Congratulations! Your score is among the best! Please, enter your name! ";
             // 
             // nameBox
             // 
