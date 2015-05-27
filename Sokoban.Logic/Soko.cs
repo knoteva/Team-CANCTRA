@@ -245,7 +245,21 @@ namespace Sokoban.Logic
         /// <returns>Списък с колекции</returns>
         private List<LevelCollection> GetCollections()
         {
-            string[] files = Directory.GetFiles(Directory.GetCurrentDirectory() + "\\Levels");
+            string defaultProjectPath = Path.GetFullPath("..//..//Levels\\Levels.txt");
+
+            if (File.Exists(defaultProjectPath))
+            {
+                return GetLevels("..//..//Levels");
+            }
+            else
+            {
+                return GetLevels(Directory.GetCurrentDirectory() + "\\Levels");
+            }
+        }
+
+        private static List<LevelCollection> GetLevels(string directory)
+        {
+            string[] files = Directory.GetFiles(directory);
             List<LevelCollection> levels = new List<LevelCollection>();
 
             foreach (string file in files)
@@ -267,7 +281,7 @@ namespace Sokoban.Logic
         {
             if (this.SelectedCollection == null)
             {
-                throw new ArgumentNullException("Избраната колекция е празна!");
+                throw new ArgumentNullException("The chosen collection is empty!");
             }
             this.CurrentLevel = 1;
             this.TotalScore = 0;
@@ -375,41 +389,66 @@ namespace Sokoban.Logic
 
         private List<TopPlayer> GetRanking()
         {
-            List<TopPlayer> topPlayers = new List<TopPlayer>();
-            // string dir = Directory.GetCurrentDirectory() + "\\TopPlayers\\topPlayers.txt";
-            string path = Directory.GetCurrentDirectory() + "\\TopPlayers\\topPlayers.txt";
-            if (!File.Exists(path))
+            string defaultProjectPath = Path.GetFullPath("..//..//TopPlayers\\topPlayers.txt");
+            if (File.Exists(defaultProjectPath))
             {
-                return topPlayers;
+                return GetTopPlayers(defaultProjectPath);
             }
             else
             {
-                string[] lines = File.ReadAllLines(path);
-                foreach (string line in lines)
+                string path = Directory.GetCurrentDirectory() + "\\TopPlayers\\topPlayers.txt";
+                if (!File.Exists(path))
                 {
-                    string[] result = line.Split(' ');
-                    TopPlayer player = new TopPlayer();
-                    int scoreFromList;
-                    bool isScore = Int32.TryParse(result[0], out scoreFromList);
-                    if (isScore)
-                    {
-                        player.Score = scoreFromList;
-                        player.Name = result[1];
-                        topPlayers.Add(player);
-                    }
+                    return new List<TopPlayer>();
                 }
-
-                return topPlayers;
+                else
+                {
+                    return GetTopPlayers(path);
+                }
             }
+        }
+
+        private static List<TopPlayer> GetTopPlayers(string path)
+        {
+            List<TopPlayer> topPlayers = new List<TopPlayer>();
+            string[] lines = File.ReadAllLines(path);
+            foreach (string line in lines)
+            {
+                string[] result = line.Split(';');
+                TopPlayer player = new TopPlayer();
+                int scoreFromList;
+                bool isScore = Int32.TryParse(result[0], out scoreFromList);
+                if (isScore)
+                {
+                    player.Score = scoreFromList;
+                    player.Name = result[1];
+                    topPlayers.Add(player);
+                }
+            }
+
+            return topPlayers;
         }
 
         public void SavePlayer(string playerName)
         {
-            string path = Directory.GetCurrentDirectory() + "\\TopPlayers\\topPlayers.txt";
+            string defaultProjectPath = Path.GetFullPath("..//..//TopPlayers\\topPlayers.txt");
+            if (File.Exists(defaultProjectPath))
+            {
+                Save(playerName, defaultProjectPath);
+            }
+            else
+            {
+                string path = Directory.GetCurrentDirectory() + "\\TopPlayers\\topPlayers.txt";
+                Save(playerName, path);
+            }
+        }
+
+        private void Save(string playerName, string path)
+        {
             List<string> lines = new List<string>();
             if (!File.Exists(path))
             {
-                lines.Add(this.TotalScore + " " + playerName);
+                lines.Add(this.TotalScore + ";" + playerName);
                 File.Create(path).Close();
                 File.WriteAllLines(path, lines);
             }
