@@ -148,7 +148,7 @@
             this.Controls.Add(this.levelSelectionGrid);
             this.Name = "LevelSelectionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "LevelSelectionForm";
+            this.Text = "Select level";
             this.Load += new System.EventHandler(this.LevelSelectionForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.levelSelectionGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.levelPreview)).EndInit();
