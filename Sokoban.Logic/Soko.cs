@@ -214,14 +214,17 @@ namespace Sokoban.Logic
 
                         if (_goalsFilled == _goalsCount && LevelCompleted != null)
                         {
-                            this.TotalScore = this.StartScore + _goalsFilled * 10 + (this.TimeLeft * 2);
-                            this.StartScore = this.TotalScore;
                             this.IsLevelCompleted = true;
-                            if (this.CurrentLevel == this.SelectedCollection.NumberOfLevels)
+                            if (GameType == GameType.Standart)
                             {
-                                if (GameType == GameType.Standart)
+                                this.TotalScore = this.StartScore + _goalsFilled * 10 + (this.TimeLeft * 2);
+                                this.StartScore = this.TotalScore;
+                                
+                                if (this.CurrentLevel == this.SelectedCollection.NumberOfLevels)
                                 {
+
                                     this.IsLastLevel = true;
+
                                 }
                             }
 

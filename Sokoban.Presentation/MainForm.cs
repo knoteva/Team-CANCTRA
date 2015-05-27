@@ -148,7 +148,11 @@ namespace Sokoban.Presentation
                 }
                 if (hasMoved)
                 {
-                    this.pointsLabel.Text = this.Model.StartScore.ToString();
+                    if (this.Model.GameType == GameType.Standart)
+                    {
+                        this.pointsLabel.Text = this.Model.StartScore.ToString();
+                    }
+
                     if (!this.Model.IsLevelCompleted)
                     {
                         undoButton.Enabled = true;
@@ -269,6 +273,7 @@ namespace Sokoban.Presentation
             else if (GameType.Practice == this.Model.GameType)
             {
                 StartPractice();
+                timer1.Stop();
             }
         }
 
@@ -348,8 +353,11 @@ namespace Sokoban.Presentation
         private void UndoMovement()
         {
             this.Model.UndoMovement();
-            this.pointsLabel.Text = this.Model.StartScore.ToString();
-            this.timerLabel.Text = this.Model.TimeLeft.ToString();
+            if (Model.GameType == GameType.Standart)
+            {
+                this.pointsLabel.Text = this.Model.StartScore.ToString();
+                this.timerLabel.Text = this.Model.TimeLeft.ToString();
+            }
             undoButton.Enabled = this.Model.MovesHistoryCount > 0;
 
             drawingArea.Invalidate();
