@@ -457,7 +457,7 @@ namespace Sokoban.Logic
             {
                 _topPlayers.Add(new TopPlayer(playerName, this.TotalScore));
                 _topPlayers = _topPlayers.OrderByDescending(x => x.Score).Take(10).ToList();
-                lines.AddRange(_topPlayers.Select(x => string.Concat(x.Score, " ", x.Name)));
+                lines.AddRange(_topPlayers.Select(x => string.Concat(x.Score, ";", x.Name)));
                 File.WriteAllLines(path, lines, Encoding.Unicode);
             }
         }
