@@ -67,6 +67,7 @@ namespace Sokoban.Presentation
             if (this.Model.TimeLeft <= 0)
             {
                 timer1.Stop();
+                RestartLevel();
             }
         }
 
