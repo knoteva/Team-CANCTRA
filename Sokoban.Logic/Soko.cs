@@ -370,8 +370,8 @@ namespace Sokoban.Logic
         private List<TopPlayer> GetRanking()
         {
             List<TopPlayer> topPlayers = new List<TopPlayer>();
-            //string dir = Directory.GetCurrentDirectory();
-            string path = Path.GetFullPath("..//..//TopPlayers\\topPlayers.txt");
+            // string dir = Directory.GetCurrentDirectory() + "\\TopPlayers\\topPlayers.txt";
+            string path = Directory.GetCurrentDirectory() + "\\TopPlayers\\topPlayers.txt";
             if (!File.Exists(path))
             {
                 return topPlayers;
@@ -399,8 +399,8 @@ namespace Sokoban.Logic
 
         public void SavePlayer(string playerName)
         {
-            //string dir = Directory.GetCurrentDirectory();
-            string path = Path.GetFullPath("..//..//TopPlayers\\topPlayers.txt");
+            // string dir = Directory.GetCurrentDirectory();
+            string path = Directory.GetCurrentDirectory() + "\\TopPlayers\\topPlayers.txt";
             List<string> lines = new List<string>();
             if (!File.Exists(path))
             {
