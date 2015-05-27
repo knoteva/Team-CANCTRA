@@ -152,6 +152,7 @@
     <Content Include="bin\Debug\Sokoban.Presentation.vshost.exe" />
     <None Include="bin\Debug\TopPlayers\topPlayers.txt" />
     <Content Include="Resources\Points.png" />
+    <Content Include="Resources\Team_Logo.png" />
     <Content Include="Resources\Time.png" />
   </ItemGroup>
   <ItemGroup />

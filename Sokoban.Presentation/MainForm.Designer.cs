@@ -206,6 +206,8 @@
             // 
             // backgroundPanel
             // 
+            this.backgroundPanel.BackgroundImage = global::Sokoban.Presentation.Properties.Resources.Team_Logo;
+            this.backgroundPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.backgroundPanel.Controls.Add(this.drawingArea);
             this.backgroundPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.backgroundPanel.Location = new System.Drawing.Point(0, 49);
