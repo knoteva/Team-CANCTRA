@@ -279,6 +279,7 @@ namespace Sokoban.Presentation
 
         private void StartPractice()
         {
+        	timer1.Stop();
             this.Model.SetCurrentLevel(1);
 
             if (DialogResult.OK == LevelSelectionForm.ShowForm(this.Model))
