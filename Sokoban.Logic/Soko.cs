@@ -219,7 +219,6 @@ namespace Sokoban.Logic
                 _movesHistory.Push(elementsList);
                 _player = _level[newPlayerRow][newPlayerCol];
                 hasMoved = true;
-                //
             }
             return hasMoved;
         }
@@ -229,7 +228,7 @@ namespace Sokoban.Logic
         /// <returns>Списък с колекции</returns>
         private List<LevelCollection> GetCollections()
         {
-            string[] files = Directory.GetFiles("Levels");
+            string[] files = Directory.GetFiles("..//..//Levels");
             List<LevelCollection> levels = new List<LevelCollection>();
 
             foreach (string file in files)
@@ -303,7 +302,6 @@ namespace Sokoban.Logic
 
         public void StartPractice()
         {
-            this.CurrentLevel = 1;
             this.IsPlaying = true;
             this.TotalScore = 0;
             this.LoadLevel();
