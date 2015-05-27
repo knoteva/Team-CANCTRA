@@ -121,29 +121,30 @@ namespace Sokoban.Presentation
             else
             {
                 bool hasMoved = false;
-
-                switch (e.KeyCode)
+                if (this.Model.GameType == GameType.Standart && this.Model.TimeLeft > 0)
                 {
-                    case Keys.Up:
-                        hasMoved = this.Model.MovePlayer(Soko.MoveDirection.Up);
-                        break;
-                    case Keys.Down:
-                        hasMoved = this.Model.MovePlayer(Soko.MoveDirection.Down);
-                        break;
-                    case Keys.Right:
-                        hasMoved = this.Model.MovePlayer(Soko.MoveDirection.Right);
-                        break;
-                    case Keys.Left:
-                        hasMoved = this.Model.MovePlayer(Soko.MoveDirection.Left);
-                        break;
-                    case Keys.Space:
-                        // for testing...
-                        break;
-                    case Keys.Back:
-                        UndoMovement();
-                        break;
+                    switch (e.KeyCode)
+                    {
+                        case Keys.Up:
+                            hasMoved = this.Model.MovePlayer(Soko.MoveDirection.Up);
+                            break;
+                        case Keys.Down:
+                            hasMoved = this.Model.MovePlayer(Soko.MoveDirection.Down);
+                            break;
+                        case Keys.Right:
+                            hasMoved = this.Model.MovePlayer(Soko.MoveDirection.Right);
+                            break;
+                        case Keys.Left:
+                            hasMoved = this.Model.MovePlayer(Soko.MoveDirection.Left);
+                            break;
+                        case Keys.Space:
+                            // for testing...
+                            break;
+                        case Keys.Back:
+                            UndoMovement();
+                            break;
+                    }
                 }
-
                 if (hasMoved)
                 {
                     this.pointsLabel.Text = this.Model.StartScore.ToString();
