@@ -10,8 +10,7 @@ namespace Sokoban.Logic
         public string CollectionName { get; private set; }
 
         private XDocument _levelsFile;
-       // private Level[] _levels;
-
+       
         public LevelCollection(string fileName)
         {
             LoadLevels(fileName);

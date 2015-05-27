@@ -218,7 +218,10 @@ namespace Sokoban.Logic
                             this.IsLevelCompleted = true;
                             if (this.CurrentLevel == this.SelectedCollection.NumberOfLevels)
                             {
-                                this.IsLastLevel = true;
+                                if (GameType == GameType.Standart)
+                                {
+                                    this.IsLastLevel = true;
+                                }
                             }
 
                             LevelCompleted(this, new EventArgs());
@@ -424,5 +427,7 @@ namespace Sokoban.Logic
             return _topPlayers;
         }
 
+
+        public GameType GameType { get; set; }
     }
 }

@@ -77,7 +77,14 @@ namespace Sokoban.Presentation
             }
             else
             {
-                statusLabel.Text = "Level Completed! Press enter to go to the next level...";
+                if (this.Model.GameType == GameType.Standart)
+                {
+                    statusLabel.Text = "Level Completed! Press enter to go to the next level...";
+                }
+                else if (this.Model.GameType == GameType.Practice)
+                {
+                    statusLabel.Text = "Level Completed! Press enter to go to menu...";
+                }
             }
 
             drawingArea.Invalidate();
@@ -94,9 +101,16 @@ namespace Sokoban.Presentation
             {
                 if (!this.Model.IsLastLevel && e.KeyCode == Keys.Enter)
                 {
-                    this.Model.NextLevel();
-                    StartLevel();
-                    StartTimer();
+                    if (this.Model.GameType == GameType.Standart)
+                    {
+                        this.Model.NextLevel();
+                        StartLevel();
+                        StartTimer();
+                    }
+                    else if (this.Model.GameType == GameType.Practice)
+                    {
+                        StartPractice();
+                    }
                 }
             }
             else
@@ -189,7 +203,7 @@ namespace Sokoban.Presentation
             if (this.Model.IsPlaying)
             {
                 if (DialogResult.Yes ==
-                    MessageBox.Show("Сигурни ли сте, че искате да затворите играта?", "Внимание",
+                    MessageBox.Show("Do you want to close the current game?", "Attention",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 {
                     this.Close();
@@ -236,22 +250,28 @@ namespace Sokoban.Presentation
 
         private void StartGame()
         {
-            var game = SelectGameTypeForm.ShowForm();
-            if (GameType.Standart == game)
+            this.Model.GameType = SelectGameTypeForm.ShowForm();
+            if (GameType.Standart == this.Model.GameType)
             {
                 this.Model.StartStandartGame();
                 StartLevel();
                 StartTimer();
             }
-            else if (GameType.Practice == game)
+            else if (GameType.Practice == this.Model.GameType)
             {
-                this.Model.SetCurrentLevel(1);
+                StartPractice();
+            }
+        }
 
-                if (DialogResult.OK == LevelSelectionForm.ShowForm(this.Model))
-                {
-                    this.Model.StartPractice();
-                    StartLevel();
-                }
+        private void StartPractice()
+        {
+            this.Model.SetCurrentLevel(1);
+
+            if (DialogResult.OK == LevelSelectionForm.ShowForm(this.Model))
+            {
+                this.Model.StartPractice();
+                pointsLabel.Text = this.Model.TotalScore.ToString();
+                StartLevel();
             }
         }
 
@@ -261,7 +281,6 @@ namespace Sokoban.Presentation
             timer1.Interval = 1000;
             timer1.Start();
         }
-
 
         private void StartLevel()
         {
@@ -305,7 +324,6 @@ namespace Sokoban.Presentation
             StartTimer();
             this.pointsLabel.Text = this.Model.StartScore.ToString();
         }
-
 
         void ShowNamePromptForm()
         {
