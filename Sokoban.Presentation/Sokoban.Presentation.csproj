@@ -138,6 +138,7 @@
     <None Include="Resources\Goal.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\PlayerRight.png" />
     <Content Include="Resources\Points.png" />
     <Content Include="Resources\Team_Logo.png" />
     <Content Include="Resources\Time.png" />

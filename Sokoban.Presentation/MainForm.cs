@@ -14,6 +14,7 @@ namespace Sokoban.Presentation
         private readonly int _defaultFormHeight;
         private readonly int _defaultBackgroundPanelWidth;
         private readonly int _defaultBackgroundPanelHeight;
+        private bool PlayerFacesRight = false;
 
         #endregion Variables
 
@@ -133,9 +134,11 @@ namespace Sokoban.Presentation
                             hasMoved = this.Model.MovePlayer(Soko.MoveDirection.Down);
                             break;
                         case Keys.Right:
+                            PlayerFacesRight = true;
                             hasMoved = this.Model.MovePlayer(Soko.MoveDirection.Right);
                             break;
                         case Keys.Left:
+                            PlayerFacesRight = false;
                             hasMoved = this.Model.MovePlayer(Soko.MoveDirection.Left);
                             break;
                         case Keys.Space:
@@ -185,7 +188,8 @@ namespace Sokoban.Presentation
                             break;
                         case ElementType.Player:
                         case ElementType.PlayerOnGoal:
-                            imageToDraw = Properties.Resources.Player;
+                            if (PlayerFacesRight) { imageToDraw = Properties.Resources.PlayerRight; }
+                            else { imageToDraw = Properties.Resources.Player; }
                             break;
                         case ElementType.BonusTime:
                             imageToDraw = Properties.Resources.Time;
