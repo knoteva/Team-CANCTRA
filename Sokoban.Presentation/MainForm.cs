@@ -121,7 +121,7 @@ namespace Sokoban.Presentation
             else
             {
                 bool hasMoved = false;
-                if (this.Model.GameType == GameType.Standart && this.Model.TimeLeft > 0)
+                if ((this.Model.GameType == GameType.Standart && this.Model.TimeLeft > 0) || this.Model.GameType == GameType.Practice)
                 {
                     switch (e.KeyCode)
                     {
