@@ -54,7 +54,7 @@ namespace Sokoban.Presentation
             if (this.Model.TimeLeft <= 0)
             {
                 timer1.Stop();
-                this.statusLabel.Text = "Please enter to restart!";
+                this.statusLabel.Text = "Please press enter to restart..";
             }
         }
 
