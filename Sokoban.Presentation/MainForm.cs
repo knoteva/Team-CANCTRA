@@ -54,7 +54,7 @@ namespace Sokoban.Presentation
             if (this.Model.TimeLeft <= 0)
             {
                 timer1.Stop();
-                RestartLevel();
+                this.statusLabel.Text = "Please enter to restart!";
             }
         }
 
@@ -95,6 +95,11 @@ namespace Sokoban.Presentation
             if (this.Model.SelectedCollection == null)
             {
                 return;
+            }
+
+            if (this.Model.TimeLeft == 0 && e.KeyCode == Keys.Enter)
+            {
+                RestartLevel();
             }
 
             if (this.Model.IsLevelCompleted)

@@ -53,6 +53,7 @@ namespace Sokoban.Logic
             }
 
         }
+        public GameType GameType { get; set; }
 
         public enum MoveDirection
         {
@@ -245,7 +246,7 @@ namespace Sokoban.Logic
         /// <returns>Списък с колекции</returns>
         private List<LevelCollection> GetCollections()
         {
-            string defaultProjectPath = Path.GetFullPath("..//..//Levels\\Levels.txt");
+            string defaultProjectPath = Path.GetFullPath("..//..//Levels\\levels.slc");
 
             if (File.Exists(defaultProjectPath))
             {
@@ -345,7 +346,7 @@ namespace Sokoban.Logic
         {
             this.IsPlaying = true;
             this.StartScore = this.TotalScore;
-            this.TimeLeft = 120;
+            this.TimeLeft = 120 + (CurrentLevel * 60);
             this.LoadLevel();
         }
 
@@ -465,8 +466,5 @@ namespace Sokoban.Logic
         {
             return _topPlayers;
         }
-
-
-        public GameType GameType { get; set; }
     }
 }
