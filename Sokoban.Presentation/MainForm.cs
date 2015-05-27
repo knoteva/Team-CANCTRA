@@ -220,7 +220,7 @@ namespace Sokoban.Presentation
             if (this.Model.IsPlaying)
             {
                 if (DialogResult.Yes ==
-                    MessageBox.Show("Сигурни ли сте, че искате да започнете нова игра?", "Внимание",
+                    MessageBox.Show("Do you want to start a new game?", "Attention",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 {
                     StartGame();
