@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Activation;
 using System.Text;
 using System.Threading;
@@ -19,6 +21,7 @@ namespace Sokoban.Logic
             this.Collections = GetCollections();
             this.SelectedCollection = this.Collections.FirstOrDefault();
             _movesHistory = new Stack<List<Element>>();
+            _topPlayers = GetRanking();
         }
 
         #region Variables
@@ -34,6 +37,22 @@ namespace Sokoban.Logic
         public int StartScore { get; set; }
         public int TotalScore { get; set; }
         public int TimeLeft { get; set; }
+        public bool HasTopScore
+        {
+            get
+            {
+                var score = _topPlayers.FirstOrDefault(x => x.Score < this.TotalScore);
+                if (score != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+        }
 
         public enum MoveDirection
         {
@@ -48,8 +67,7 @@ namespace Sokoban.Logic
         private Element _player;
         private int _goalsCount;
         private int _goalsFilled;
-        private int _bonusCoins;
-        private int _bonusTime;
+        private List<TopPlayer> _topPlayers;
 
         private Stack<List<Element>> _movesHistory;
         public int MovesHistoryCount { get { return _movesHistory.Count; } }
@@ -66,8 +84,6 @@ namespace Sokoban.Logic
             Height = level.Height;
             _goalsCount = 0;
             _goalsFilled = 0;
-            _bonusTime = 0;
-            _bonusCoins = 0;
             _level = new Element[level.Data.Length][];
 
             for (int row = 0; row < level.Data.Length; row++)
@@ -107,11 +123,9 @@ namespace Sokoban.Logic
                             break;
                         case '~':
                             _level[row][col].Type = ElementType.BonusTime;
-                            _bonusTime += 5;
                             break;
                         case '%':
                             _level[row][col].Type = ElementType.BonusPoints;
-                            _bonusCoins += 10;
                             break;
                     }
                 }
@@ -263,7 +277,7 @@ namespace Sokoban.Logic
         public void NextLevel()
         {
             CurrentLevel++;
-            this.TimeLeft = 120;
+            this.TimeLeft = 120 + (CurrentLevel * 60);
             this.StartScore = this.TotalScore;
             this.IsPlaying = true;
             this.LoadLevel();
@@ -351,6 +365,61 @@ namespace Sokoban.Logic
 
                 _player = elementsList[0];
             }
+        }
+
+        private List<TopPlayer> GetRanking()
+        {
+            List<TopPlayer> topPlayers = new List<TopPlayer>();
+            //string dir = Directory.GetCurrentDirectory();
+            string path = Path.GetFullPath("..//..//TopPlayers\\topPlayers.txt");
+            if (!File.Exists(path))
+            {
+                return topPlayers;
+            }
+            else
+            {
+                string[] lines = File.ReadAllLines(path);
+                foreach (string line in lines)
+                {
+                    string[] result = line.Split(' ');
+                    TopPlayer player = new TopPlayer();
+                    int scoreFromList;
+                    bool isScore = Int32.TryParse(result[0], out scoreFromList);
+                    if (isScore)
+                    {
+                        player.Score = scoreFromList;
+                        player.Name = result[1];
+                        topPlayers.Add(player);
+                    }
+                }
+
+                return topPlayers;
+            }
+        }
+
+        public void SavePlayer(string playerName)
+        {
+            //string dir = Directory.GetCurrentDirectory();
+            string path = Path.GetFullPath("..//..//TopPlayers\\topPlayers.txt");
+            List<string> lines = new List<string>();
+            if (!File.Exists(path))
+            {
+                lines.Add(this.TotalScore + " " + playerName);
+                File.Create(path).Close();
+                File.WriteAllLines(path, lines);
+            }
+            else
+            {
+                _topPlayers.Add(new TopPlayer(playerName, this.TotalScore));
+                _topPlayers = _topPlayers.OrderByDescending(x => x.Score).Take(10).ToList();
+                lines.AddRange(_topPlayers.Select(x => string.Concat(x.Score, " ", x.Name)));
+                File.WriteAllLines(path, lines, Encoding.Unicode);
+            }
+        }
+
+        public List<TopPlayer> GetTopPlayers()
+        {
+            return _topPlayers;
         }
 
     }

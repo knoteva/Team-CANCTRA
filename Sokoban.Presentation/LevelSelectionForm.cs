@@ -33,8 +33,6 @@ namespace Sokoban.Presentation
             _paddingY = (levelPreview.Height - (soko.Height * _cellSize)) / 2;
 
             levelPreview.Invalidate();
-
-
         }
 
         private void LevelSelectionForm_Load(object sender, EventArgs e)

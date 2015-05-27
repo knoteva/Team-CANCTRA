@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sokoban.Logic;
-using Sokoban.Presentation.Helpers;
-using System.IO;
 
 namespace Sokoban.Presentation
 {
@@ -17,16 +9,9 @@ namespace Sokoban.Presentation
     {
         #region Variables
         public Soko Model { get; set; }
-
-        private int _paddingX;
-        private int _paddingY;
-
         private readonly int _cellSize = Properties.Resources.Wall.Width;
-        // private int _currentLevel;
-
         private readonly int _defaultFormWidth;
         private readonly int _defaultFormHeight;
-
         private readonly int _defaultBackgroundPanelWidth;
         private readonly int _defaultBackgroundPanelHeight;
 
@@ -82,12 +67,10 @@ namespace Sokoban.Presentation
                 statusLabel.Text = "Level Completed! No more levels in the collection.";
 
                 //top score check call
-                if (CheckIfTopScore(this.Model.TotalScore))
+                if (this.Model.HasTopScore)
                 {
                     ShowNamePromptForm();
                 }
-
-
             }
             else
             {
@@ -192,7 +175,7 @@ namespace Sokoban.Presentation
 
         void topRankingMenuItem_Click(object sender, EventArgs e)
         {
-            TopPlayersForm.ShowForm();
+            TopPlayersForm.ShowForm(this.Model.GetTopPlayers());
         }
 
 
@@ -314,39 +297,16 @@ namespace Sokoban.Presentation
             this.pointsLabel.Text = this.Model.StartScore.ToString();
         }
 
-        static bool CheckIfTopScore(int score)
-        {
-            string dirPath = Path.GetFullPath("TopPlayers");
-            string path = (Path.GetFullPath("TopPlayers\\topPlayers.txt"));
-            if (!Directory.Exists(dirPath) || !File.Exists(path))
-            {
-                return true;
-            }
-            else
-            {
-                string[] lines = File.ReadAllLines(path);
-                foreach (string line in lines)
-                {
-                    int scoreFromList;
-                    bool result = Int32.TryParse(line.Split(' ')[0], out scoreFromList);
-                    if (result)
-                    {
-                        if (scoreFromList <= score)
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            return false;
-        }
 
         void ShowNamePromptForm()
         {
-            NamePromptForm npf = new NamePromptForm();
-            npf.score = this.Model.TotalScore;
-            npf.ShowDialog();
+            string playerName = NamePromptForm.ShowForm();
+            if (string.IsNullOrWhiteSpace(playerName))
+            {
+                playerName = "Unknown";
+            }
+
+            this.Model.SavePlayer(playerName);
         }
 
         private void UndoMovement()

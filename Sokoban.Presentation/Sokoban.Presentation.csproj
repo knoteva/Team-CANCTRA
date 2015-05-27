@@ -45,9 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\TopPlayer.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="LevelSelectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,10 +102,6 @@
     <EmbeddedResource Include="TopPlayersForm.resx">
       <DependentUpon>TopPlayersForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="bin\Debug\Levels\Levels.slc" />
-    <None Include="bin\Debug\Sokoban.Presentation.exe.config" />
-    <None Include="bin\Debug\Sokoban.Presentation.vshost.exe.config" />
-    <None Include="bin\Debug\Sokoban.Presentation.vshost.exe.manifest" />
     <None Include="Levels\Levels.slc" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -145,15 +138,10 @@
     <None Include="Resources\Goal.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Sokoban.Logic.dll" />
-    <Content Include="bin\Debug\Sokoban.Logic.pdb" />
-    <Content Include="bin\Debug\Sokoban.Presentation.exe" />
-    <Content Include="bin\Debug\Sokoban.Presentation.pdb" />
-    <Content Include="bin\Debug\Sokoban.Presentation.vshost.exe" />
-    <None Include="bin\Debug\TopPlayers\topPlayers.txt" />
     <Content Include="Resources\Points.png" />
     <Content Include="Resources\Team_Logo.png" />
     <Content Include="Resources\Time.png" />
+    <Content Include="TopPlayers\topPlayers.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
