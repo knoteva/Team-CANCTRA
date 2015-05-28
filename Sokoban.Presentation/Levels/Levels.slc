@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <SokobanLevels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="">
   <LevelCollection Name="Standart">
-    <Level Id="1" Width="19" Height="11">
+    <Level Id="1" Width="19" Height="6">
+      <L>###################</L>
+      <L>#    #          ..#</L>
+      <L>#                 #</L>
+      <L># $ $  ~  $ $ @#  #</L>
+      <L># %             ..#</L>
+      <L>###################</L>
+    </Level>
+    <Level Id="2" Width="6" Height="7">
+      <L>####</L>
+      <L>#~ #</L>
+      <L>#  #</L>
+      <L># @###</L>
+      <L># $$ #</L>
+      <L>#. %.#</L>
+      <L>######</L>
+    </Level>
+    <Level Id="3" Width="6" Height="6">
+      <L>####</L>
+      <L># ~###</L>
+      <L>#  $@#</L>
+      <L># *. #</L>
+      <L>##  %#</L>
+      <L> #####</L>
+    </Level>
+    <Level Id="4" Width="19" Height="11">
       <L>    #####</L>
       <L>    #   #</L>
       <L>    #$  #</L>
@@ -14,7 +39,7 @@
       <L>    #   % #########</L>
       <L>    #######</L>
     </Level>
-    <Level Id="2" Width="14" Height="10">
+    <Level Id="5" Width="14" Height="10">
       <L>############</L>
       <L>#..  #   % ###</L>
       <L>#..  # $  $  #</L>
