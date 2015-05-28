@@ -10,7 +10,7 @@ namespace Sokoban.Logic
         public string CollectionName { get; private set; }
 
         private XDocument _levelsFile;
-       
+
         public LevelCollection(string fileName)
         {
             LoadLevels(fileName);
@@ -47,14 +47,47 @@ namespace Sokoban.Logic
             int levelHeight = level.Count();
             string[] levelData = new string[levelHeight];
             int rowNumber = 0;
+            bool hasTimeBonus = false;
+            bool hasPointsBonus = false;
 
             foreach (var row in level)
             {
+                if (!hasTimeBonus && row.Value.Contains('~'))//bonus time
+                {
+                    if (RandomGenerator(20))
+                    {
+                        hasTimeBonus = true;
+                    }
+                }
+
+                if (!hasPointsBonus && row.Value.Contains('%'))//bonus points
+                {
+                    if (RandomGenerator(30))
+                    {
+                        hasPointsBonus = true;
+                    }
+                }
+
                 levelData[rowNumber] += row.Value;
                 rowNumber++;
             }
 
-            return new Level() { Data = levelData, Width = levelWidth, Height = levelHeight };
+
+            return new Level() { Data = levelData, Width = levelWidth, Height = levelHeight, HasPointsBonus = hasPointsBonus, HasTimeBonus = hasTimeBonus };
+        }
+
+        private bool RandomGenerator(int percentage)
+        {
+            Random gen = new Random();
+            int prob = gen.Next(100);
+            if (prob < percentage)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

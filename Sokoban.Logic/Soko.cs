@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Activation;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
 
 namespace Sokoban.Logic
 {
@@ -123,10 +117,24 @@ namespace Sokoban.Logic
                             _level[row][col].Type = ElementType.Floor;
                             break;
                         case '~':
-                            _level[row][col].Type = ElementType.BonusTime;
+                            if (level.HasTimeBonus)
+                            {
+                                _level[row][col].Type = ElementType.BonusTime;
+                            }
+                            else
+                            {
+                                _level[row][col].Type = ElementType.Floor;
+                            }
                             break;
                         case '%':
-                            _level[row][col].Type = ElementType.BonusPoints;
+                            if (level.HasPointsBonus)
+                            {
+                                _level[row][col].Type = ElementType.BonusPoints;
+                            }
+                            else
+                            {
+                                _level[row][col].Type = ElementType.Floor;
+                            }
                             break;
                     }
                 }
@@ -219,7 +227,7 @@ namespace Sokoban.Logic
                             {
                                 this.TotalScore = this.StartScore + _goalsFilled * 10 + (this.TimeLeft * 2);
                                 this.StartScore = this.TotalScore;
-                                
+
                                 if (this.CurrentLevel == this.SelectedCollection.NumberOfLevels)
                                 {
 
