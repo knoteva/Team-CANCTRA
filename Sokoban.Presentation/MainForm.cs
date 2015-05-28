@@ -251,7 +251,6 @@ namespace Sokoban.Presentation
         void restartButton_Click(object sender, EventArgs e)
         {
             RestartLevel();
-            StartTimer();
         }
 
         void undoButton_Click(object sender, EventArgs e)
@@ -340,8 +339,11 @@ namespace Sokoban.Presentation
             }
             this.Model.RestartLevel();
             StartLevel();
-            StartTimer();
-            this.pointsLabel.Text = this.Model.StartScore.ToString();
+            if (this.Model.GameType == GameType.Standart)
+            {
+                StartTimer();
+                this.pointsLabel.Text = this.Model.StartScore.ToString();
+            }
         }
 
         void ShowNamePromptForm()

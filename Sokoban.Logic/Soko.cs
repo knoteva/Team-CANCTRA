@@ -298,7 +298,7 @@ namespace Sokoban.Logic
             this.CurrentLevel = 1;
             this.TotalScore = 0;
             this.StartScore = 0;
-            this.TimeLeft = 120;
+            this.TimeLeft = 120 + (CurrentLevel * 60);
             this.LoadLevel();
             IsPlaying = true;
         }
@@ -318,7 +318,6 @@ namespace Sokoban.Logic
         /// <summary>
         /// Зарежда ниво
         /// </summary>
-        /// <param name="levelNumber">Номер на нивото</param>
         public void LoadLevel()
         {
             this.LoadLevel(this.SelectedCollection[CurrentLevel]);
